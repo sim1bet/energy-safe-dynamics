@@ -1,0 +1,440 @@
+# Theorem / claim registry — application-agnostic.
+#
+# One entry per theoretical claim (theorem/proposition/lemma/corollary/
+# explicit remark) extracted from a governing theory document. This
+# registry is NOT specific to `deep_dissipative_nlink`: the schema supports
+# multiple `theory_source` documents and multiple `applies_to_experiments`,
+# so a future `duffing_doublewell` or `nonlinearbenchmark.org`-style task
+# built on the same shared `EBM_model` port-Hamiltonian architecture can
+# register its own claims (or reuse these) without restructuring.
+#
+# Populated, for this pass, from:
+#   iclr2027_conference_robust_extensions_red.tex   (theory)
+#   results/deep_dissipative_nlink/copilotA1_theory_formal_verification_cross_audit.md (T1-T18)
+#
+# Do not paraphrase away quantifiers/strictness when editing this file.
+
+schema_version: 1
+
+theory_sources:
+  - id: iclr2027_robust_extensions
+    path: iclr2027_conference_robust_extensions_red.tex
+    role: "Level-1 authoritative theory (theorems/propositions/assumptions/domains)."
+
+claims:
+  - claim_id: T1
+    label: "eq:ph_dynamics (J skew-symmetry)"
+    theory_source: iclr2027_robust_extensions
+    section: "Methods / Port-Hamiltonian neural ODE"
+    name: "Interconnection matrix skew-symmetry"
+    claim_type: model_class_requirement
+    statement: "J_{theta_J}(z) = -J_{theta_J}(z)^T for all z."
+    hypotheses: []
+    conclusion: "q^T J q = 0 for every real q (used in the dissipativity derivation)."
+    domain: "all z in R^d"
+    quantifier: "for all z"
+    local_or_global: global
+    strict_or_nonstrict: exact_equality
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: nominal
+    model_objects: [J, A_theta]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T1"
+    implementation_ref: "EBM_model/EBM_param_fields.py::_assemble_A"
+    stress_test_ref: "none in the legacy suite.py pipeline; new: certificates/structural_checks.py::check_skew_symmetry"
+
+  - claim_id: T2
+    label: "eq:ph_dynamics (R PSD)"
+    theory_source: iclr2027_robust_extensions
+    section: "Methods / Port-Hamiltonian neural ODE"
+    name: "Dissipation matrix positive semidefiniteness"
+    claim_type: model_class_requirement
+    statement: "0 <= R_{theta_R}(z) = R_{theta_R}(z)^T for all z."
+    hypotheses: []
+    conclusion: "-grad(H)^T R grad(H) <= 0 (used in the dissipativity derivation)."
+    domain: "all z in R^d"
+    quantifier: "for all z"
+    local_or_global: global
+    strict_or_nonstrict: non_strict_required_strict_implemented
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: nominal
+    model_objects: [R, M_theta]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T2"
+    implementation_ref: "EBM_model/EBM_param_fields.py::_assemble_M, _cholesky_bounded"
+    stress_test_ref: "new: certificates/structural_checks.py::check_dissipation_pd"
+
+  - claim_id: T3
+    label: "eq:energy_balance"
+    theory_source: iclr2027_robust_extensions
+    section: "Methods / Port-Hamiltonian neural ODE"
+    name: "Unforced dissipativity identity"
+    claim_type: theorem
+    statement: "dH/dt = -grad(H)^T R grad(H) + y_p^T u <= y_p^T u."
+    hypotheses: ["T1", "T2", "H continuously differentiable"]
+    conclusion: "Dissipativity relation with storage H and supply rate y_p^T u."
+    domain: "all z in R^d, all admissible u"
+    quantifier: "for all z, u; along every solution"
+    local_or_global: global
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: nominal
+    model_objects: [H_theta, R, J, y_p]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T3"
+    implementation_ref: "EBM_model/EBM_param_fields.py::vector_field_and_output (uses CLIPPED gradient g, not exact grad(H))"
+    stress_test_ref: "new: certificates/unforced_dissipativity_probe.py (SAMPLED_ONLY, finite-difference)"
+
+  - claim_id: T4
+    label: "eq:coercive_lower_bound, App. app:hybrid"
+    theory_source: iclr2027_robust_extensions
+    section: "Methods / Hybrid modern Hopfield Hamiltonian"
+    name: "Coercivity of the hybrid Hamiltonian"
+    claim_type: proposition
+    statement: "H_theta(z) >= (1/2)||z||^2 - c1||z|| - c0 for finite c0,c1 >= 0, given the first hidden activation has bounded image and bounded derivative and deeper maps are continuous."
+    hypotheses: ["first hidden activation Psi_2 bounded image & bounded derivative", "deeper maps continuous"]
+    conclusion: "H_theta is coercive; sublevel sets are compact whenever nonempty."
+    domain: "all z in R^d"
+    quantifier: "for all z"
+    local_or_global: global
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: not_time_dependent
+    nominal_or_robust: nominal
+    model_objects: [H_theta]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: false
+    notes: >-
+      Theory's proof is for a Hamiltonian WITHOUT the per-layer bias term
+      that EBM_class.py::energy_layer_k actually includes; extension is
+      plausible (see cross-audit) but not written in the .tex and not
+      re-derived here as a formal proof.
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T4"
+    implementation_ref: "EBM_model/EBM_class.py::energy_EBM"
+    stress_test_ref: "none (proof-extension obligation, not a numerical check)"
+
+  - claim_id: T5
+    label: "definitions preceding eq:component_safe_set"
+    theory_source: iclr2027_robust_extensions
+    section: "Results / Regular energy levels expose the fundamental robustness margin"
+    name: "Isolated local minimizer existence/location"
+    claim_type: assumption
+    statement: "z_star is an isolated local minimizer of H_theta, i.e. grad(H_theta(z_star)) = 0."
+    hypotheses: []
+    conclusion: "Anchors V_star, C_{eps,star}, Gamma_{eps,star} used by all Tier-2 results."
+    domain: "R^d (existence guaranteed by T4's coercivity + continuity, standard real analysis); operational ball ||z||<=STATE_NORM_CLIP (implementation restriction)"
+    quantifier: "there exists z_star"
+    local_or_global: local
+    strict_or_nonstrict: exact_equality
+    continuous_or_discrete: not_time_dependent
+    nominal_or_robust: nominal
+    model_objects: [z_star, H_theta]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T5"
+    implementation_ref: "Stress_tests/geometry.py::discover_minima, filter_converged_wells (grad_norm_tol=1.0 default)"
+    stress_test_ref: "new: certificates/equilibrium_hessian_probe.py (diagnostic only; does not establish T5)"
+
+  - claim_id: T6
+    label: "Proposition exact_cbf_set"
+    theory_source: iclr2027_robust_extensions
+    section: "Results / Exact and robust set-valued input certificates"
+    name: "Exact pointwise CBF admissible-input set"
+    claim_type: proposition
+    statement: "U_CBF(z) = {u in U : a_H(z)^T u <= d_H(z) + alpha(h_eps(z))} for every z in D."
+    hypotheses: ["T1", "T2", "H is C^1 with locally Lipschitz gradient", "f_theta locally Lipschitz in z"]
+    conclusion: "Exact, pointwise, no-equilibrium-required admissible input set."
+    domain: "any z in D, an open neighborhood of C_eps"
+    quantifier: "for all z in D"
+    local_or_global: global_pointwise
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust_capable
+    model_objects: [d_H, a_H, h_eps, alpha]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T6"
+    implementation_ref: "Stress_tests/certificate.py::audit_certificate (formula path; uses CLIPPED gradient, not exact grad(H))"
+    stress_test_ref: "legacy: Stress_tests/suite.py -> certificate_boundary_audit.formula_violation_fraction (SAMPLED_ONLY, reclassified non-canonical-as-proof)"
+
+  - claim_id: T7
+    label: "implemented-dynamics diagnostic (no theory counterpart)"
+    theory_source: iclr2027_robust_extensions
+    section: "n/a — engineering diagnostic"
+    name: "Implemented-dynamics CBF slack (clipped + PGD-attacked)"
+    claim_type: out_of_scope_diagnostic
+    statement: "Same inequality as T6, evaluated on the fully clipped/RK4-integrated vector field with a PGD-refined worst-case input."
+    hypotheses: []
+    conclusion: "Engineering margin between the idealized theory and the deployed, safety-clipped system."
+    domain: "sampled boundary states"
+    quantifier: "sampled"
+    local_or_global: local_sampled
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: discrete_time_surrogate
+    nominal_or_robust: robust_capable
+    model_objects: [implemented_hdot]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T7"
+    implementation_ref: "Stress_tests/model_adapter.py::implemented_hdot; Stress_tests/certificate.py::_pgd_implemented_worst_input"
+    stress_test_ref: "legacy: Stress_tests/suite.py -> certificate_boundary_audit.implemented_violation_fraction (diagnostic, not a theorem test)"
+
+  - claim_id: T8
+    label: "Theorem thm:uniform_boundary_set"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:robust_boundary"
+    name: "Maximal uniform robust input set"
+    claim_type: theorem
+    statement: "Any locally essentially bounded u(t) in U_bar_{eps,star}^rob a.e. renders C_{eps,star} robustly forward invariant; U_bar is maximal among state-independent subsets."
+    hypotheses: ["T5 (isolated z_star)", "Gamma_{eps,star} regular (T10)", "C_{eps,star} compact"]
+    conclusion: "Maximal state-independent robust input set and forward invariance."
+    domain: "Gamma_{eps,star}"
+    quantifier: "for all z in Gamma_{eps,star}"
+    local_or_global: local_component
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust
+    model_objects: [z_star, Gamma_eps_star, U_bar_rob]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T8"
+    implementation_ref: "none — not computed anywhere in the current codebase"
+    stress_test_ref: "NONE (missing); blocked on T5"
+
+  - claim_id: T9
+    label: "eq:exact_robust_radius, App. app:robust_boundary"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:robust_boundary"
+    name: "Exact certified input radius"
+    claim_type: derived_formula
+    statement: "rho*_{eps,star} = inf_{z in Gamma, a_H(z)!=0} delta_eps(z)/||a_H(z)||_*"
+    hypotheses: ["T5", "T8"]
+    conclusion: "Largest origin-centered norm ball certified for all boundary states."
+    domain: "Gamma_{eps,star}"
+    quantifier: "infimum over z in Gamma_{eps,star}"
+    local_or_global: local_component
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust
+    model_objects: [rho_star, delta_eps]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T9"
+    implementation_ref: "none — the pipeline tests a FIXED ad hoc input_radius=1.0 instead of computing this formula"
+    stress_test_ref: "NONE (missing); blocked on T5"
+
+  - claim_id: T10
+    label: "Proposition regular_boundary"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:regular_boundary"
+    name: "Regular energy boundary"
+    claim_type: proposition
+    statement: "grad(H)(z) != 0 for all z in Gamma_{eps,star} implies Gamma is a regular C^1 hypersurface with kappa_{eps,star} := inf_Gamma ||grad H||_2 > 0."
+    hypotheses: ["Gamma_{eps,star} compact", "H in C^1 near Gamma"]
+    conclusion: "Well-defined outward energy normal; positive boundary slope."
+    domain: "Gamma_{eps,star}"
+    quantifier: "for all z in Gamma_{eps,star}"
+    local_or_global: local_component
+    strict_or_nonstrict: strict_nonzero
+    continuous_or_discrete: not_time_dependent
+    nominal_or_robust: nominal
+    model_objects: [Gamma_eps_star, kappa_eps_star]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T10"
+    implementation_ref: "Stress_tests/boundary.py::sample_energy_boundary (does not log per-point ||grad H||)"
+    stress_test_ref: "NONE currently logs per-point gradient norms on the boundary sample"
+
+  - claim_id: T11
+    label: "App. app:regular_boundary, r_{eps,star} definition"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:regular_boundary"
+    name: "Boundary dissipation lower bound"
+    claim_type: derived_quantity
+    statement: "r_{eps,star} := inf_{Gamma} n^T R n > 0."
+    hypotheses: ["T2 (R PSD)", "compactness of Gamma (in general)"]
+    conclusion: "Positive dissipation-in-normal-direction constant used by the regular-boundary radius formula."
+    domain: "Gamma_{eps,star}"
+    quantifier: "infimum over z in Gamma_{eps,star}"
+    local_or_global: local_component
+    strict_or_nonstrict: strict_positive
+    continuous_or_discrete: not_time_dependent
+    nominal_or_robust: nominal
+    model_objects: [R, n]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    notes: >-
+      For copilotA1, R=M_theta is CONSTANT (state-independent,
+      use_state_damping=false), so r_{eps,star} >= lambda_min(M_theta) > 0
+      automatically for ANY z, without needing Gamma's compactness at all.
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T11"
+    implementation_ref: "EBM_model/EBM_param_fields.py::_assemble_M"
+    stress_test_ref: "new: certificates/structural_checks.py::check_dissipation_pd (lambda_min directly gives a valid lower bound on r_{eps,star})"
+
+  - claim_id: T12
+    label: "Proposition hessian_pl"
+    theory_source: iclr2027_robust_extensions
+    section: "Results / When is the local PL condition justified?"
+    name: "Local Clarke-Hessian certificate for PL"
+    claim_type: proposition
+    statement: "If m_star := min_{M in Clarke-Hessian(z_star)} lambda_min(M) > 0, then for 0<mu_star<m_star there is a convex neighborhood on which (1/2)||grad H||^2 >= mu_star*(H(z)-H(z_star))."
+    hypotheses: ["T5 (z_star exists, grad(H(z_star))=0)", "H is C^1 with locally Lipschitz gradient"]
+    conclusion: "Local PL inequality (strong-convexity-equivalent) around z_star."
+    domain: "neighborhood N_star of z_star"
+    quantifier: "for all z in N_star"
+    local_or_global: local
+    strict_or_nonstrict: strict_positive
+    continuous_or_discrete: not_time_dependent
+    nominal_or_robust: nominal
+    model_objects: [z_star, Clarke_Hessian, mu_star]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    notes: >-
+      For copilotA1's smooth activations (tanh, polynomial_stable), the
+      Clarke generalized Hessian is the ordinary Hessian (singleton set) --
+      "the result reduces to the classical Hessian test" (theory's own
+      remark). No nonsmooth machinery is actually required for this
+      architecture.
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T12"
+    implementation_ref: "none — no Hessian/PL computation exists anywhere in Stress_tests/"
+    stress_test_ref: "new: certificates/equilibrium_hessian_probe.py (finite-difference Hessian at the CURRENT non-stationary candidate only; does NOT establish T12, since T5 is unresolved)"
+
+  - claim_id: T13
+    label: "Theorem thm:input_energy"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:input_energy"
+    name: "Input-to-energy tube under persistent forcing"
+    claim_type: theorem
+    statement: "If c <= r_star*sqrt(2*mu_star*eps), then C_{eps,star} is robustly forward invariant and V_star(t) <= exp(-r_star mu_star t) V_star(0) + c^2/(2 r_star^2 mu_star)(1-exp(...))."
+    hypotheses: ["T12 (local PL with mu_star,r_star)", "bounded ||G||,||u||,||w||"]
+    conclusion: "Explicit ultimate energy tube under persistent bounded forcing/disturbance."
+    domain: "C_{eps,star}, all t>=0"
+    quantifier: "for all t"
+    local_or_global: local_component
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust
+    model_objects: [V_star, r_star, mu_star]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T13"
+    implementation_ref: "none — not computed"
+    stress_test_ref: "NONE (missing); blocked on T5, T12"
+
+  - claim_id: T14
+    label: "eq:robust_cbf_set, sigma_{W(z)} term"
+    theory_source: iclr2027_robust_extensions
+    section: "Results / Exact and robust set-valued input certificates"
+    name: "State-disturbance robustness term"
+    claim_type: model_class_requirement
+    statement: "Robust CBF condition includes sigma_{W(z)}(grad H(z)) for a compact disturbance set W(z)."
+    hypotheses: []
+    conclusion: "Robustness to bounded additive state disturbance, not just input uncertainty."
+    domain: "any W(z) compact"
+    quantifier: "for all w in W(z)"
+    local_or_global: global_pointwise
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust
+    model_objects: [W_z, sigma_W]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T14"
+    implementation_ref: "Stress_tests/config.py::UncertaintySet.state_disturbance_radius (=0 for copilotA1)"
+    stress_test_ref: "legacy: Stress_tests/suite.py certificate audit supports this but was never exercised (radius=0)"
+
+  - claim_id: T15
+    label: "Proposition plant_transfer"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:atlas_transfer"
+    name: "Plant-level certificate transfer"
+    claim_type: proposition
+    statement: "If f_star(z,u)=f_theta(z,u)+Delta(z,u), Delta in validated W_Delta(z,u), and the robust boundary condition holds with W replaced by W_Delta, then C_{eps,star} is forward invariant for the PHYSICAL dynamics."
+    hypotheses: ["validated additive model-error enclosure W_Delta", "certified latent<->physical state correspondence"]
+    conclusion: "Certificate transfer from the neural model to the true unknown plant."
+    domain: "shared physical coordinates"
+    quantifier: "for all z in Gamma_{eps,star}"
+    local_or_global: local_component
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust
+    model_objects: [f_star, Delta, W_Delta]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: false
+    notes: "Theory itself states this is inapplicable without a certified latent<->physical correspondence, which output_only mode does not provide. Both this run's audit and the cross-audit independently agree: out of scope."
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T15"
+    implementation_ref: "none attempted"
+    stress_test_ref: "NOT_APPLICABLE by design (output_only mode)"
+
+  - claim_id: T16
+    label: "remark after eq:port_output"
+    theory_source: iclr2027_robust_extensions
+    section: "Methods / Port-Hamiltonian neural ODE"
+    name: "Fitted-output / port-output decoupling"
+    claim_type: architectural_remark
+    statement: "y_hat = h_phi(z,u) remains the quantity fitted to data, while y_p(z) := G^T grad(H)(z) is the power-conjugate port output used ONLY for the energy dissipation analysis."
+    hypotheses: []
+    conclusion: "Fitting quality of y_hat says nothing directly about y_p's dissipativity-relevant behavior; this is BY DESIGN."
+    domain: "n/a — architectural"
+    quantifier: "n/a"
+    local_or_global: global
+    strict_or_nonstrict: n/a
+    continuous_or_discrete: n/a
+    nominal_or_robust: n/a
+    model_objects: [y_obs, y_port]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: true
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T16"
+    implementation_ref: "EBM_model/EBM_param_fields.py::vector_field_and_output (returns y_port, y_obs separately)"
+    stress_test_ref: "new: certificates/structural_checks.py::check_output_port_decoupling"
+
+  - claim_id: T17
+    label: "App. app:ph closing remark"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:ph"
+    name: "No asymptotic-stability claim from dissipativity alone"
+    claim_type: explicit_disclaimer
+    statement: "Convergence to a particular minimum requires additional information on the invariant set where the dissipation vanishes and is not implied by coercivity alone."
+    hypotheses: []
+    conclusion: "The theory does NOT claim zero-input asymptotic stability."
+    domain: "n/a"
+    quantifier: "n/a"
+    local_or_global: n/a
+    strict_or_nonstrict: n/a
+    continuous_or_discrete: n/a
+    nominal_or_robust: n/a
+    model_objects: [H_theta]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: false
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T17"
+    implementation_ref: "none — matches: no such claim exists in the codebase either"
+    stress_test_ref: "NOT_APPLICABLE (both theory and implementation agree no such claim is made)"
+
+  - claim_id: T18
+    label: "proof of Theorem thm:uniform_boundary_set (Nagumo argument)"
+    theory_source: iclr2027_robust_extensions
+    section: "Appendix app:robust_boundary, proof"
+    name: "Continuous-time forward invariance (Nagumo)"
+    claim_type: theorem_proof_technique
+    statement: "Nagumo's tangent condition applied to the EXACT continuous-time flow of eq. (perturbed_ph_app)."
+    hypotheses: ["T5", "T10", "exact (unclipped, unprojected) vector field"]
+    conclusion: "Robust forward invariance of C_{eps,star} for the exact ODE."
+    domain: "continuous flow, all t"
+    quantifier: "for all t"
+    local_or_global: local_component
+    strict_or_nonstrict: non_strict
+    continuous_or_discrete: continuous_time
+    nominal_or_robust: robust
+    model_objects: [z_star, Gamma_eps_star]
+    directly_relevant_experiments: [deep_dissipative_nlink]
+    executable_verification_meaningful: false
+    notes: >-
+      The implemented rollouts use RK4 + a HARD state-norm projection
+      (EBM_rollout.py::_clip_state) in addition to the SOFT gradient/
+      vector-field clips — a projected, discretized surrogate system, not
+      the exact ODE this proof concerns.
+    cross_audit_ref: "copilotA1_theory_formal_verification_cross_audit.md row T18"
+    implementation_ref: "EBM_model/EBM_rollout.py::make_rollout_fn (RK4 + _clip_state)"
+    stress_test_ref: "legacy: Stress_tests/suite.py greedy_adversarial_timestep_audit, random_piecewise_stress (EMPIRICAL evidence about the surrogate system only)"

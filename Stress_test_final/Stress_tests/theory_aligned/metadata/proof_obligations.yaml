@@ -1,0 +1,319 @@
+# Proof-obligation registry — atomic conditions decomposed from theorem_registry.yaml.
+#
+# Every obligation traces to exactly one parent claim_id in theorem_registry.yaml.
+# `enforcement` uses the vocabulary required by the restructuring task:
+#   guaranteed_by_architecture | guaranteed_by_parameterization |
+#   guaranteed_by_exact_algebra | guaranteed_by_constrained_optimization |
+#   encouraged_by_soft_penalty | checked_analytically |
+#   checked_by_sound_numerical_method | checked_only_by_sampling |
+#   not_checked | not_checkable_without_additional_machinery
+#
+# `status` uses the required proof-obligation vocabulary:
+#   PROVED_BY_CONSTRUCTION | ANALYTICALLY_VERIFIED | SOUNDLY_NUMERICALLY_VERIFIED |
+#   STRUCTURAL_REGRESSION_CHECKED | SAMPLED_ONLY | EMPIRICALLY_SUPPORTED |
+#   NOT_VERIFIED | NOT_APPLICABLE | CONTRADICTED
+
+schema_version: 1
+
+obligations:
+  - obligation_id: OB-T1-1
+    parent_claim_id: T1
+    condition: "J_theta(z) = -J_theta(z)^T for the trained checkpoint's actual parameters."
+    quantifier: "for all z (in fact state-independent here: J does not depend on z)"
+    domain: "all z in R^d"
+    enforcement: guaranteed_by_exact_algebra
+    implementation_object: "EBM_param_fields.py::_assemble_A (A = upper_tri - upper_tri.T)"
+    verification_method: "Recompute A in float64 numpy from the checkpoint's trained e_A entries; check max|A+A^T| < 1e-10."
+    tolerance: "1e-10 (far above float64 rounding at this matrix scale; chosen to detect any real defect, not to accommodate one)"
+    soundness_status: sound_exact_identity
+    testability_status: executable
+    current_evidence: "EXECUTED for copilotA1: max_abs_skew_defect = 0.0 exactly (see reports/copilotA1_structural_checks.json)."
+    status: PROVED_BY_CONSTRUCTION
+    canonical_test: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_skew_symmetry"
+
+  - obligation_id: OB-T2-1
+    parent_claim_id: T2
+    condition: "R = M_theta = M_theta^T and lambda_min(M_theta) >= 0 (theory); ACTUAL construction gives lambda_min(M_theta) > 0 strictly."
+    quantifier: "for all z (state-independent for copilotA1: use_state_damping=false)"
+    domain: "all z in R^d"
+    enforcement: guaranteed_by_parameterization
+    implementation_object: "EBM_param_fields.py::_assemble_M, _cholesky_bounded (M = L L^T, diag(L)=exp(clip(.,+/-1.5))>0)"
+    verification_method: "Recompute M in float64 numpy from the checkpoint's trained L_M entries; eigvalsh; check symmetry defect < 1e-10 and lambda_min > 0."
+    tolerance: "symmetry: 1e-10; positivity: > 0 (no tolerance needed given the exp(.) construction cannot produce exactly 0)"
+    soundness_status: sound_exact_identity_plus_numerical_eigendecomposition
+    testability_status: executable
+    current_evidence: >-
+      EXECUTED for copilotA1: lambda_min=0.004419, lambda_max=0.447725,
+      condition_number~101.3, Cholesky diag in [0.2231,0.2569] (very close
+      to the -CHOL_CLIP_EXP=-1.5 initialization value, i.e. M barely moved
+      from its light-damping initialization during training).
+    status: PROVED_BY_CONSTRUCTION
+    canonical_test: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_dissipation_pd"
+
+  - obligation_id: OB-T3-1
+    parent_claim_id: T3
+    condition: "-grad(H_theta)(z)^T M_theta grad(H_theta)(z) <= 0 (equivalently drift(z):=g^T M g >= 0) for the idealized, unclipped gradient."
+    quantifier: "for all z (theory); tested only at finitely many sampled z (implementation)"
+    domain: "all z in R^d (theory); Gaussian-sampled states (implementation)"
+    enforcement: guaranteed_by_exact_algebra
+    implementation_object: "Algebraically implied by OB-T2-1 (M PSD/PD) for ANY gradient vector g, by definition of a quadratic form"
+    verification_method: "Finite-difference (h=1e-4) approximate grad(H) at 8 random states, combine with checkpoint's exact M, check g^T M g >= 0."
+    tolerance: "none needed (quadratic form with PD matrix is unconditionally >=0; finite-difference error only affects the reported g, not the conclusion's validity)"
+    soundness_status: exact_algebraic_consequence_of_OB-T2-1_confirmed_numerically
+    testability_status: executable
+    current_evidence: >-
+      EXECUTED for copilotA1: drift_raw_nonneg=True and drift_clipped_nonneg=True
+      at all 8 sampled states (state norms 9.3-17.6). ADDITIONALLY: clip_scale_factor
+      (clipped/raw gradient norm) ranged 0.54-0.98 across these samples,
+      confirming GRAD_E_CLIP=200 is materially active (up to 46% shrinkage)
+      even at moderate, non-extreme state norms -- not just at the well.
+    status: STRUCTURAL_REGRESSION_CHECKED
+    canonical_test: "Stress_tests/theory_aligned/certificates/unforced_dissipativity_probe.py"
+
+  - obligation_id: OB-T4-1
+    parent_claim_id: T4
+    condition: "H_theta(z) >= (1/2)||z||^2 - c1||z|| - c0 for the EXACT (bias-inclusive) implemented Hamiltonian."
+    quantifier: "for all z in R^d"
+    domain: "all z in R^d"
+    enforcement: not_checkable_without_additional_machinery
+    implementation_object: "EBM_class.py::energy_EBM (includes per-layer bias b_k absent from the theory's proven formula)"
+    verification_method: "Symbolic extension of App. app:hybrid's compactness argument to include the bias terms (not performed here)."
+    tolerance: n/a
+    soundness_status: not_yet_established
+    testability_status: analytic_extension_required
+    current_evidence: "NOT EXECUTED. This is a proof-obligation for the THEORY DOCUMENT ITSELF (extend the coercivity proof), not a numerical check against any checkpoint."
+    status: NOT_VERIFIED
+    canonical_test: "none (proof-extension task, tracked in metadata/removal_manifest.yaml as a theory-side action item)"
+
+  - obligation_id: OB-T5-1
+    parent_claim_id: T5
+    condition: "There exists z_star in the operational ball with grad(H_theta(z_star)) = 0."
+    quantifier: "there exists z_star"
+    domain: "||z|| <= STATE_NORM_CLIP (50 for copilotA1)"
+    enforcement: not_checked
+    implementation_object: "Stress_tests/geometry.py::discover_minima + filter_converged_wells (grad_norm_tol=1.0 default)"
+    verification_method: "Interval Newton / branch-and-bound over [-50,50]^8 for a certified zero of grad(H_theta), OR a much larger multi-start budget with full terminal-gradient-norm reporting."
+    tolerance: "grad_norm_tol=1.0 (existing filter's own threshold, not derived from any theorem-required precision)"
+    soundness_status: unsound_for_existence_currently_sampling_only_for_absence
+    testability_status: executable_but_not_yet_performed_at_required_rigor
+    current_evidence: >-
+      copilotA1's retained candidate has ||grad(H)|| = 104.55 (audit.json)
+      independently reproduced here via finite differences: 104.5497
+      (relative difference 8.4e-7). This is a SEARCH FAILURE, not a proof
+      of non-existence (T4's coercivity, if the bias-extension in OB-T4-1
+      holds, guarantees SOME global minimizer exists in R^8 by Weierstrass;
+      whether it lies inside the operational ball is unresolved).
+      DIAGNOSTIC BONUS: the Hessian at this non-stationary candidate is
+      already positive definite (eigenvalues 9.15-732.09), suggesting a
+      Newton step FROM this point is a promising, cheap next search
+      direction (not evidence of a nearby equilibrium by itself).
+    status: NOT_VERIFIED
+    canonical_test: "Stress_tests/theory_aligned/certificates/equilibrium_hessian_probe.py (diagnostic only; does not resolve this obligation)"
+
+  - obligation_id: OB-T6-1
+    parent_claim_id: T6
+    condition: "a_H(z)^T u <= d_H(z) + alpha(h_eps(z)) for the ADMISSIBLE input actually applied, at sampled boundary states, using the EXACT (unclipped) grad(H)."
+    quantifier: "for all z in D (theory); sampled at 526 boundary points (implementation)"
+    domain: "boundary trace anchored at the (non-converged) candidate well"
+    enforcement: checked_only_by_sampling
+    implementation_object: "Stress_tests/certificate.py::audit_certificate (formula path uses the SOFT-CLIPPED gradient g, not exact grad(H))"
+    verification_method: "Sampled evaluation at 526 boundary points; PGD-style worst-case-input construction (exact/analytic for the affine formula)."
+    tolerance: "slack_tolerance=1e-5 (code default, no theory-derived justification)"
+    soundness_status: sampled_not_exhaustive_and_evaluated_on_a_clipped_approximation_of_the_exact_object
+    testability_status: executable
+    current_evidence: >-
+      Historical (legacy suite.py, reused unmodified): formula_violation_fraction
+      = 0.0779 (41/526 sampled points violate, at the idealized/clipped-formula
+      level). See copilotA1_theory_audit_v1.md sec. 8/14.
+    status: CONTRADICTED
+    canonical_test: "legacy Stress_tests/suite.py -> certificate_boundary_audit (reclassified: SAMPLED_ONLY diagnostic, NOT a certificate pass/fail in the new canonical suite)"
+
+  - obligation_id: OB-T7-1
+    parent_claim_id: T7
+    condition: "Same inequality as OB-T6-1 evaluated on the fully clipped + RK4 + hard-state-clip implemented dynamics, PGD-attacked."
+    quantifier: "sampled, 526 points + 40-step/4-restart PGD"
+    domain: "boundary trace"
+    enforcement: checked_only_by_sampling
+    implementation_object: "Stress_tests/model_adapter.py::implemented_hdot"
+    verification_method: "PGD attack on the implemented (clipped) vector field."
+    tolerance: "slack_tolerance=1e-5"
+    soundness_status: sampled_not_exhaustive
+    testability_status: executable
+    current_evidence: "Historical: implemented_violation_fraction = 0.167 (88/526). See copilotA1_theory_audit_v1.md sec. 8/14."
+    status: EMPIRICALLY_SUPPORTED
+    canonical_test: "legacy Stress_tests/suite.py -> certificate_boundary_audit (reclassified: engineering diagnostic, out of theory scope per theorem_registry T7)"
+
+  - obligation_id: OB-T8-1
+    parent_claim_id: T8
+    condition: "Compute U_bar_{eps,star}^rob and verify a candidate operational input set is contained in it."
+    quantifier: "for all z in Gamma_{eps,star}"
+    domain: "Gamma_{eps,star}"
+    enforcement: not_checked
+    implementation_object: "none"
+    verification_method: "Direct evaluation of eq. (uniform_robust_set) once T5/T12 are resolved."
+    tolerance: n/a
+    soundness_status: not_applicable_until_T5_resolved
+    testability_status: blocked_on_OB-T5-1
+    current_evidence: "NOT EXECUTED. No code path exists."
+    status: NOT_VERIFIED
+    canonical_test: "none (missing; tracked in removal_manifest.yaml as a required new implementation, not yet built)"
+
+  - obligation_id: OB-T9-1
+    parent_claim_id: T9
+    condition: "Compute rho*_{eps,star} and compare to the actually-used input_radius=1.0."
+    quantifier: "infimum over Gamma_{eps,star}"
+    domain: "Gamma_{eps,star}"
+    enforcement: not_checked
+    implementation_object: "none — the legacy pipeline tests a FIXED radius against the pointwise inequality instead of computing this closed-form bound"
+    verification_method: "Direct evaluation of eq. (exact_robust_radius) using r_{eps,star} (already available from OB-T2-1/T11) and kappa/bar_g once T5 is resolved."
+    tolerance: n/a
+    soundness_status: not_applicable_until_T5_resolved
+    testability_status: blocked_on_OB-T5-1
+    current_evidence: "NOT EXECUTED. No code path exists."
+    status: NOT_VERIFIED
+    canonical_test: "none (missing)"
+
+  - obligation_id: OB-T10-1
+    parent_claim_id: T10
+    condition: "grad(H_theta)(z) != 0 for every z on the traced boundary Gamma_{eps,star}."
+    quantifier: "for all z in Gamma_{eps,star}"
+    domain: "Gamma_{eps,star} (526 sampled points for copilotA1)"
+    enforcement: not_checked
+    implementation_object: "Stress_tests/boundary.py::sample_energy_boundary (does not log per-point ||grad H||)"
+    verification_method: "Log ||grad(H)(z)|| for every traced boundary point; check strictly positive minimum."
+    tolerance: "> 0 (no tolerance; a numerically-tiny-but-nonzero value would still satisfy the theorem, only exact 0 fails it)"
+    soundness_status: plausible_but_unconfirmed
+    testability_status: executable_missing_instrumentation
+    current_evidence: "NOT EXECUTED (no per-point boundary gradient norms are logged by the existing pipeline)."
+    status: NOT_VERIFIED
+    canonical_test: "none yet (recommended addition to Stress_tests/boundary.py output, out of this pass's scope since it requires modifying shared infrastructure)"
+
+  - obligation_id: OB-T11-1
+    parent_claim_id: T11
+    condition: "r_{eps,star} := inf_Gamma n^T R n > 0."
+    quantifier: "infimum over Gamma_{eps,star}"
+    domain: "Gamma_{eps,star}"
+    enforcement: guaranteed_by_parameterization
+    implementation_object: "EBM_param_fields.py::_assemble_M (state-independent for copilotA1)"
+    verification_method: "Since M is constant, n^T M n >= lambda_min(M) for ANY unit n and ANY z; lambda_min(M) already computed in OB-T2-1."
+    tolerance: "> 0"
+    soundness_status: sound_exact_consequence_of_state_independence_plus_OB-T2-1
+    testability_status: executable
+    current_evidence: "r_{eps,star} >= lambda_min(M_theta) = 0.004419 (from OB-T2-1), holding automatically for ANY z, without needing Gamma's compactness."
+    status: PROVED_BY_CONSTRUCTION
+    canonical_test: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_dissipation_pd (lambda_min output doubles as this obligation's evidence)"
+
+  - obligation_id: OB-T12-1
+    parent_claim_id: T12
+    condition: "min eigenvalue of the (classical, for this architecture) Hessian of H_theta at z_star is > 0."
+    quantifier: "at the single point z_star"
+    domain: "neighborhood of z_star"
+    enforcement: not_checked
+    implementation_object: "none — no Hessian computation exists anywhere in Stress_tests/"
+    verification_method: "jax.hessian(H_theta) at a CERTIFIED z_star (blocked on OB-T5-1), or the finite-difference Hessian implemented here as a diagnostic proxy."
+    tolerance: "> 0"
+    soundness_status: blocked_on_OB-T5-1_for_a_genuine_certificate; diagnostic-only finite-difference Hessian computed at the current non-stationary candidate
+    testability_status: executable_diagnostic_only
+    current_evidence: >-
+      DIAGNOSTIC (does not resolve this obligation, since it is evaluated
+      at a non-stationary point): finite-difference Hessian eigenvalues at
+      the current best candidate are ALL POSITIVE (9.15 to 732.09,
+      condition number ~80), a favorable but non-conclusive sign for a
+      nearby genuine minimizer.
+    status: NOT_VERIFIED
+    canonical_test: "Stress_tests/theory_aligned/certificates/equilibrium_hessian_probe.py"
+
+  - obligation_id: OB-T13-1
+    parent_claim_id: T13
+    condition: "c <= r_star * sqrt(2*mu_star*eps)."
+    quantifier: "n/a (a single scalar inequality once all constants are known)"
+    domain: "C_{eps,star}"
+    enforcement: not_checked
+    implementation_object: "none"
+    verification_method: "Direct evaluation once T5/T12 resolved and bar_g, bar_u, bar_w bounds are established."
+    tolerance: n/a
+    soundness_status: not_applicable_until_T5_T12_resolved
+    testability_status: blocked_on_OB-T5-1_OB-T12-1
+    current_evidence: "NOT EXECUTED."
+    status: NOT_VERIFIED
+    canonical_test: "none (missing)"
+
+  - obligation_id: OB-T14-1
+    parent_claim_id: T14
+    condition: "sigma_{W(z)}(grad H(z)) correctly enters the robust CBF slack for state_disturbance_radius > 0."
+    quantifier: "for all w in W(z)"
+    domain: "any compact W(z)"
+    enforcement: checked_by_sound_numerical_method
+    implementation_object: "Stress_tests/certificate.py::worst_case_state_disturbance (unit-tested for correctness in Stress_tests/Additional_tests/tests/test_mapped_disturbance.py against brute-force/analytic values)"
+    verification_method: "Existing infrastructure unit tests confirm the SUPPORT-FUNCTION FORMULA is correctly implemented; never exercised at radius>0 for copilotA1."
+    tolerance: "rtol=1e-5/2e-6 (Stress_tests/Additional_tests/tests/test_mapped_disturbance.py)"
+    soundness_status: formula_verified_by_unit_test_never_exercised_for_this_checkpoint
+    testability_status: executable_not_yet_run_at_radius_gt_0
+    current_evidence: "state_disturbance_radius=0.0 for copilotA1 (config.json); term is identically zero, never numerically exercised for this run."
+    status: NOT_VERIFIED
+    canonical_test: "legacy Stress_tests/Additional_tests/tests/test_mapped_disturbance.py (infrastructure unit test, not a per-checkpoint certificate); recommend re-running the certificate suite with radius>0 as a future action"
+
+  - obligation_id: OB-T15-1
+    parent_claim_id: T15
+    condition: "Validated additive model-error enclosure W_Delta(z,u) and a certified latent<->physical state correspondence exist."
+    quantifier: "n/a"
+    domain: "n/a"
+    enforcement: not_checkable_without_additional_machinery
+    implementation_object: "none"
+    verification_method: "n/a — both prerequisites are absent by design (output_only mode)."
+    tolerance: n/a
+    soundness_status: not_applicable
+    testability_status: not_applicable
+    current_evidence: "Both copilotA1_theory_audit_v1.md and the theory document independently agree this is out of scope for an output_only latent model."
+    status: NOT_APPLICABLE
+    canonical_test: "none (correctly out of scope)"
+
+  - obligation_id: OB-T16-1
+    parent_claim_id: T16
+    condition: "y_obs and y_port are computed by architecturally distinct formulas with no shared readout parameters."
+    quantifier: "n/a — architectural"
+    domain: "n/a"
+    enforcement: guaranteed_by_architecture
+    implementation_object: "EBM_param_fields.py::vector_field_and_output"
+    verification_method: "Static code inspection + config check (w_passivity value)."
+    tolerance: n/a
+    soundness_status: sound_static_inspection
+    testability_status: executable
+    current_evidence: "EXECUTED for copilotA1: confirmed distinct formulas; w_passivity=0.0 (y_port never entered training)."
+    status: PROVED_BY_CONSTRUCTION
+    canonical_test: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_output_port_decoupling"
+
+  - obligation_id: OB-T17-1
+    parent_claim_id: T17
+    condition: "No code path in this repository claims zero-input asymptotic stability from dissipativity alone."
+    quantifier: "n/a"
+    domain: "n/a"
+    enforcement: not_checked
+    implementation_object: "n/a"
+    verification_method: "Static review (both cross-audit and theory document agree)."
+    tolerance: n/a
+    soundness_status: sound_by_absence
+    testability_status: not_applicable
+    current_evidence: "Confirmed by cross-audit row T17: no such claim exists in the code or the theory."
+    status: NOT_APPLICABLE
+    canonical_test: "none needed"
+
+  - obligation_id: OB-T18-1
+    parent_claim_id: T18
+    condition: "The Nagumo continuous-time forward-invariance argument applies to the ACTUAL simulated system (RK4 + hard clip + soft clips)."
+    quantifier: "for all t, continuous flow"
+    domain: "continuous flow of the EXACT ODE (theory); discretized, projected surrogate (implementation)"
+    enforcement: not_checked
+    implementation_object: "EBM_model/EBM_rollout.py::make_rollout_fn"
+    verification_method: "None sound exists; only finite-sample rollout evidence on the projected surrogate."
+    tolerance: n/a
+    soundness_status: unsound_for_the_exact_continuous_claim
+    testability_status: empirical_only
+    current_evidence: >-
+      Historical (legacy suite.py): greedy_adversarial_timestep_audit and
+      random_piecewise_stress show 0% violation across 96 rollouts x 3
+      step sizes, with the hard state-clip actively engaging (15-20 unit
+      corrections) during those rollouts -- evidence about the SURROGATE
+      system, not the exact ODE this theorem concerns.
+    status: EMPIRICALLY_SUPPORTED
+    canonical_test: "legacy Stress_tests/suite.py -> greedy_adversarial_timestep_audit, random_piecewise_stress (reclassified: diagnostic evidence about the deployed surrogate, not a proof of the continuous-time theorem)"

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "canonical_root": "certificates/hner99",
+  "reports": {
+    "ced_phebm": {"json": "certificates/hner99/ced/ced_phebm_hner99_runtime.json", "text": "certificates/hner99/ced/ced_phebm_hner99_runtime.txt"},
+    "ced_porthnn_u": {"json": "certificates/hner99/ced/ced_porthnn_u_hner99_runtime.json", "text": "certificates/hner99/ced/ced_porthnn_u_hner99_runtime.txt"},
+    "duffing_phebm": {"json": "certificates/hner99/duffing_doublewell/duffing_doublewell_phebm_hner99_runtime.json", "text": "certificates/hner99/duffing_doublewell/duffing_doublewell_phebm_hner99_runtime.txt"},
+    "duffing_porthnn_u": {"json": "certificates/hner99/duffing_doublewell/duffing_doublewell_porthnn_u_hner99_runtime.json", "text": "certificates/hner99/duffing_doublewell/duffing_doublewell_porthnn_u_hner99_runtime.txt"},
+    "nanodrone_phebm": {"json": "certificates/hner99/nanodrone/nanodrone_phebm_hner99_runtime.json", "text": "certificates/hner99/nanodrone/nanodrone_phebm_hner99_runtime.txt"},
+    "silverbox_phebm": {"json": "certificates/hner99/silverbox/silverbox_phebm_hner99_runtime.json", "text": "certificates/hner99/silverbox/silverbox_phebm_hner99_runtime.txt"},
+    "silverbox_porthnn_u": {"json": "certificates/hner99/silverbox/silverbox_porthnn_u_hner99_runtime.json", "text": "certificates/hner99/silverbox/silverbox_porthnn_u_hner99_runtime.txt"},
+    "three_link_phebm": {"json": "certificates/hner99/three_link_pendulum/three_link_pendulum_phebm_hner99_runtime.json", "text": "certificates/hner99/three_link_pendulum/three_link_pendulum_phebm_hner99_runtime.txt"},
+    "three_link_porthnn_u": {"json": "certificates/hner99/three_link_pendulum/three_link_pendulum_porthnn_u_hner99_runtime.json", "text": "certificates/hner99/three_link_pendulum/three_link_pendulum_porthnn_u_hner99_runtime.txt"}
+  }
+}
+

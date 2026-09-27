@@ -1,0 +1,154 @@
+# Removal manifest — every existing stress-test sub-analysis that is removed
+# from the CANONICAL CERTIFICATE pass/fail decision, where it goes, and why.
+#
+# IMPORTANT: "removal" here means removal from certificate PASS/FAIL and from
+# formal-verification CLAIMS only. No source file (Stress_tests/suite.py,
+# boundary.py, certificate.py, geometry.py, frontier.py, rollouts.py,
+# model_adapter.py) is deleted, moved, or modified: these remain the shared,
+# application-agnostic production pipeline used to generate figures and
+# diagnostics for EVERY experiment (deep_dissipative_nlink, duffing_doublewell,
+# and future tasks). No historical run_status.json/audit.json/stress_arrays.npz
+# for any past run is modified or deleted.
+
+schema_version: 1
+
+entries:
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> discover_minima + filter_converged_wells"
+    original_test_name: "wells (audit.json: metrics.stress.wells)"
+    original_claimed_purpose: >-
+      Historically read (by both prior narrative audit reports) as
+      establishing/anchoring "the model's equilibrium," implicitly treated
+      as a certificate prerequisite.
+    actual_measured_property: >-
+      Terminal states of 192 multi-start Adam descents on H_theta, clustered
+      and filtered by a HARD-CODED grad_norm_tol=1.0; falls back to "the
+      least-bad candidate" when nothing converges (as happened for copilotA1:
+      104.55 vs tol 1.0).
+    theory_mapping_status: "Supports obligation OB-T5-1 (existence/location of z_star, theorem T5) but does NOT by itself establish it."
+    classification: SPLIT
+    reason_for_removal_from_certificate: >-
+      A non-converged fallback candidate was being implicitly treated as a
+      verified equilibrium by downstream epsilon-selection and all Tier-2
+      theory. This overstates what the search actually found.
+    archival_destination: "Stress_tests/Additional_tests/archive_noncanonical/ (documentation only; underlying code Stress_tests/geometry.py is unchanged and still runs for every experiment)"
+    effect_on_certification: >-
+      No longer implicitly treated as satisfying OB-T5-1. Its numeric
+      output (gradient norm, energy) is retained as DIAGNOSTIC evidence
+      about the search status only.
+    historical_outputs_preserved: "results/deep_dissipative_nlink/runs/*/audits/audit.json (untouched); results/deep_dissipative_nlink/runs/*/stress_tests/arrays/stress_arrays.npz (untouched)"
+
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> Stress_tests/certificate.py::audit_certificate (formula path)"
+    original_test_name: "certificate_boundary_audit.formula_violation_fraction"
+    original_claimed_purpose: "Implicitly cited in prior reports as evidence for/against 'the certificate holding'."
+    actual_measured_property: >-
+      Fraction of 526 SAMPLED boundary points where the idealized CBF
+      inequality (evaluated with the SOFT-CLIPPED gradient, not the theory's
+      exact grad(H)) is violated beyond a 1e-5 tolerance.
+    theory_mapping_status: "Maps to theorem T6 (Prop. exact_cbf_set), evaluated on 526 of an uncountable domain, and on a clip-adjacent approximation of the exact object."
+    classification: REWRITE_CERTIFICATE
+    reason_for_removal_from_certificate: >-
+      A sampled check over a continuum cannot be a certificate pass/fail by
+      itself; and the specific object evaluated (clipped gradient) is not
+      exactly the theory's stated quantity. Retained as SAMPLED_ONLY
+      evidence, explicitly not a proof, with the clip caveat documented.
+    archival_destination: "Retained as-is in Stress_tests/suite.py (unchanged); reclassified via metadata/test_traceability.yaml as legacy_id=LEGACY-boundary-formula"
+    effect_on_certification: "No longer described as 'formal verification'; its 7.8% violation rate is reported under CONTRADICTED for OB-T6-1, not silently omitted."
+    historical_outputs_preserved: "unchanged"
+
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> Stress_tests/certificate.py::audit_certificate (implemented/PGD path)"
+    original_test_name: "certificate_boundary_audit.implemented_violation_fraction"
+    original_claimed_purpose: "Implicitly conflated with the formula-level result as 'the' certificate outcome."
+    actual_measured_property: "Same inequality, evaluated on the fully clipped + RK4-consistent vector field, PGD-attacked over the input set."
+    theory_mapping_status: "No direct theorem counterpart (T7 in theorem_registry.yaml is explicitly marked out_of_scope_diagnostic)."
+    classification: MOVE_DIAGNOSTIC
+    reason_for_removal_from_certificate: "Tests an engineering property (robustness of the DEPLOYED, clipped system) that the .tex theory never states as a theorem; valuable, but not a formal-guarantee test."
+    archival_destination: "Retained as-is in Stress_tests/suite.py (unchanged); documented as legacy_id=LEGACY-boundary-implemented"
+    effect_on_certification: "Removed from certificate pass/fail; retained as an engineering-margin diagnostic (16.7% violation rate reported, labeled accordingly)."
+    historical_outputs_preserved: "unchanged"
+
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> certificate_fidelity (4096-point random-domain audit)"
+    original_test_name: "certificate_fidelity"
+    original_claimed_purpose: "Quantify formula-vs-implemented gap broadly."
+    actual_measured_property: "Formula/implemented hdot gap statistics over 4096 near-data-perturbed states."
+    theory_mapping_status: "Diagnostic only — no theorem in theorem_registry.yaml requires this quantity."
+    classification: MOVE_DIAGNOSTIC
+    reason_for_removal_from_certificate: "Useful numerical-fidelity diagnostic (how large is the clip-induced gap in general), not itself a theorem test."
+    archival_destination: "Retained as-is in Stress_tests/suite.py (unchanged); documented as legacy_id=LEGACY-fidelity"
+    effect_on_certification: "Removed from any pass/fail role; retained as diagnostic evidence supporting the T3/T6 clip-magnitude discussion."
+    historical_outputs_preserved: "unchanged"
+
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> Stress_tests/rollouts.py::adversarial_rollout (greedy)"
+    original_test_name: "greedy_adversarial_timestep_audit"
+    original_claimed_purpose: "Implicitly cited as evidence the certificate 'holds' over long horizons."
+    actual_measured_property: "0/2000-8000-step containment under a per-step GREEDY (not globally optimal) worst-case input, at 3 integration step sizes, on the projected/clipped surrogate dynamics."
+    theory_mapping_status: "Empirical evidence adjacent to T18 (continuous-time Nagumo argument), but for a discretized+projected surrogate under a weaker-than-required adversary."
+    classification: MOVE_DIAGNOSTIC
+    reason_for_removal_from_certificate: "Cannot certify a continuous-time, globally-quantified theorem via a finite, greedy-adversary, discretized rollout sample."
+    archival_destination: "Retained as-is in Stress_tests/suite.py (unchanged); documented as legacy_id=LEGACY-greedy-adversarial"
+    effect_on_certification: "Removed from certificate pass/fail; retained as empirical stress-test evidence about deployed-system behavior, explicitly not a theorem proof."
+    historical_outputs_preserved: "unchanged"
+
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> Stress_tests/rollouts.py::random_piecewise_input"
+    original_test_name: "random_piecewise_stress"
+    original_claimed_purpose: "Additional robustness evidence."
+    actual_measured_property: "Containment under RANDOM (non-adversarial) piecewise-constant input."
+    theory_mapping_status: "Weaker than LEGACY-greedy-adversarial; same T18 adjacency."
+    classification: MOVE_DIAGNOSTIC
+    reason_for_removal_from_certificate: "Random inputs are not the theorem's 'for all admissible u' quantifier; falsification-style evidence only."
+    archival_destination: "Retained as-is in Stress_tests/suite.py (unchanged); documented as legacy_id=LEGACY-random-piecewise"
+    effect_on_certification: "Removed from certificate pass/fail; retained as diagnostic."
+    historical_outputs_preserved: "unchanged"
+
+  - original_path: "Stress_tests/suite.py::run_stress_suite -> Stress_tests/frontier.py::compute_robustness_frontier"
+    original_test_name: "robustness_frontier"
+    original_claimed_purpose: "Visualize how much the input/disturbance set could shrink before losing margin."
+    actual_measured_property: "Worst-case slack over an 81x81 input-scale x disturbance-scale grid, on the sampled boundary."
+    theory_mapping_status: "Adjacent to T9 (exact certified radius) but never computes T9's own closed-form rho*_{eps,star}; a numerical grid search of a related but not identical quantity."
+    classification: MOVE_DIAGNOSTIC
+    reason_for_removal_from_certificate: "Visualization/diagnostic aid; does not itself constitute the theorem's closed-form radius computation."
+    archival_destination: "Retained as-is in Stress_tests/suite.py (unchanged); documented as legacy_id=LEGACY-frontier"
+    effect_on_certification: "Removed from certificate pass/fail; retained as a diagnostic visualization, and as a concrete pointer toward the missing OB-T9-1 implementation."
+    historical_outputs_preserved: "unchanged (figures under results/deep_dissipative_nlink/runs/*/stress_tests/figures/robustness_frontier.{png,pdf})"
+
+  - original_path: "Stress_tests/tests/ (historical location; now Stress_tests/Additional_tests/tests/)"
+    original_test_name: "Supplemental pytest regression suite"
+    original_claimed_purpose: "Software-engineering regression coverage of the Stress_tests package and adjacent training code."
+    actual_measured_property: "Mathematical-identity correctness of the certificate machinery on random/synthetic parameters; shape/API regression; config-routing safety; windowing/data-hygiene correctness. NONE of these evaluate any TRAINED checkpoint against a theorem."
+    theory_mapping_status: "Out of scope by construction (no run/checkpoint involved); several (test_certificate_math.py, test_mapped_disturbance.py) verify the FORMULAS that the certificate suite depends on, and are cited as supporting evidence for those formulas' correctness."
+    classification: ARCHIVE
+    reason_for_removal_from_certificate: >-
+      These were never part of any certificate pass/fail decision in the
+      first place; explicitly documented here so their status is
+      unambiguous going forward and so they are not mistaken for
+      checkpoint-level certificate evidence.
+    archival_destination: "Stress_tests/Additional_tests/tests/ (isolated from the canonical theory checks while remaining executable)."
+    effect_on_certification: "None — they never contributed to it and continue not to."
+    historical_outputs_preserved: "n/a (these are pytest source files, not per-run artifacts)"
+
+not_yet_implemented_but_required:
+  # Obligations with testability_status="executable" (per proof_obligations.yaml)
+  # that have NO canonical test yet. Listed here, not silently dropped.
+  - obligation_id: OB-T8-1
+    required_action: "Implement eq.(uniform_robust_set) once OB-T5-1/OB-T10-1 are resolved."
+  - obligation_id: OB-T9-1
+    required_action: "Implement eq.(exact_robust_radius) and compare to the ad hoc input_radius=1.0 currently used."
+  - obligation_id: OB-T10-1
+    required_action: "Add per-point ||grad H|| logging to Stress_tests/boundary.py::sample_energy_boundary's output (a change to shared infrastructure, deliberately out of scope for this pass)."
+  - obligation_id: OB-T13-1
+    required_action: "Implement eq.(input_energy_estimate) once OB-T5-1/OB-T12-1 are resolved."
+  - obligation_id: OB-T4-1
+    required_action: "Extend the coercivity proof in Appendix app:hybrid of iclr2027_conference_robust_extensions_red.tex to explicitly cover the bias term in EBM_class.py::energy_layer_k (a THEORY-DOCUMENT action, not a code/test action)."
+  - obligation_id: OB-T6-1
+    required_action: >-
+      Deliberately NOT elevated to a canonical certificate test: OB-T6-1 is
+      exercised only by the legacy, reclassified suite.py sub-analysis
+      (legacy_id=LEGACY-boundary-formula in removal_manifest.yaml's
+      `entries`), whose 7.8% violation rate is reported under CONTRADICTED
+      in proof_obligations.yaml. This is intentional -- a sampled check over
+      an uncountable domain cannot become "canonical/formal" merely by being
+      re-labeled; it remains SAMPLED_ONLY evidence regardless of which
+      manifest lists it.
+  - obligation_id: OB-T7-1
+    required_action: "Same rationale as OB-T6-1; exercised only by legacy_id=LEGACY-boundary-implemented, reported EMPIRICALLY_SUPPORTED, deliberately not elevated to canonical."
+  - obligation_id: OB-T14-1
+    required_action: "Exercised only by the infrastructure unit test legacy_id=LEGACY-pytest-certificate-math (formula correctness only, never run at state_disturbance_radius>0 for copilotA1). Required action: re-run the legacy certificate suite with state_disturbance_radius>0 for copilotA1 to obtain the first non-trivial evidence for this obligation."

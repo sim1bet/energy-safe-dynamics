@@ -1,0 +1,212 @@
+# Test traceability matrix — maps every CANONICAL test to a theorem claim
+# and a proof obligation. Application-agnostic: `applies_to_run` identifies
+# the specific checkpoint/run a given execution was performed against; the
+# test implementations themselves (`test_path`) are shared/reusable code
+# that can be re-pointed at any run following the same EBM_model/
+# experiment_paths.py conventions (deep_dissipative_nlink, duffing_doublewell,
+# or a future nonlinearbenchmark.org task).
+#
+# Meta-test invariants (enforced by Stress_tests/theory_aligned/tests/):
+#   1. every entry below has a non-null theorem_claim_id and obligation_id
+#      that exist in theorem_registry.yaml / proof_obligations.yaml;
+#   2. every executable obligation in proof_obligations.yaml with
+#      testability_status starting with "executable" has at least one
+#      entry below OR an explicit `not_yet_implemented: true` marker;
+#   3. no entry has suite="certificate" and evidence_type="fitting_metric".
+
+schema_version: 1
+
+canonical_certificate_tests:
+  - test_id: CERT-OB-T1-1
+    theorem_claim_id: T1
+    obligation_id: OB-T1-1
+    test_path: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_skew_symmetry"
+    suite: certificate
+    evidence_type: structural_regression
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "A_theta (interconnection matrix), recomputed from checkpoint's e_A"
+    domain_checked: "n/a — exact algebraic identity, holds for any z"
+    quantifier_approximation: "none — this is an exact identity check, not a sampled approximation"
+    method: "float64 numpy recomputation of _assemble_A + max|A+A^T|"
+    tolerance: "1e-10"
+    soundness_classification: PROVED_BY_CONSTRUCTION
+    expected_output: "max_abs_skew_defect == 0.0 (up to float rounding)"
+    last_executed: "2026-08-20"
+    last_result: "PASSED (max_abs_skew_defect = 0.0)"
+
+  - test_id: CERT-OB-T2-1
+    theorem_claim_id: T2
+    obligation_id: OB-T2-1
+    test_path: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_dissipation_pd"
+    suite: certificate
+    evidence_type: structural_regression
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "M_theta (dissipation matrix), recomputed from checkpoint's L_M"
+    domain_checked: "n/a — exact algebraic identity (state-independent for copilotA1), holds for any z"
+    quantifier_approximation: "none"
+    method: "float64 numpy recomputation of _assemble_M + eigvalsh"
+    tolerance: "symmetry 1e-10; lambda_min > 0 (no slack)"
+    soundness_classification: PROVED_BY_CONSTRUCTION
+    expected_output: "symmetric, lambda_min(M) > 0"
+    last_executed: "2026-08-20"
+    last_result: "PASSED (lambda_min=0.004419, lambda_max=0.447725)"
+
+  - test_id: CERT-OB-T3-1
+    theorem_claim_id: T3
+    obligation_id: OB-T3-1
+    test_path: "Stress_tests/theory_aligned/certificates/unforced_dissipativity_probe.py::run_probe"
+    suite: certificate
+    evidence_type: sampled_numerical_check
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "drift(z) = g^T M g >= 0 for finite-difference-approximated g at 8 sampled z"
+    domain_checked: "N(0, 5^2 I_8), unstructured (NOT the certified operational ball, NOT boundary-anchored)"
+    quantifier_approximation: "SAMPLED at 8 points; theory is 'for all z'"
+    method: "central finite-difference gradient (h=1e-4) + exact checkpoint M"
+    tolerance: "none (quadratic form sign is unconditional given PD M)"
+    soundness_classification: STRUCTURAL_REGRESSION_CHECKED
+    expected_output: "drift >= 0 at every sampled point (guaranteed by OB-T2-1, not an independent risk)"
+    last_executed: "2026-08-20"
+    last_result: "PASSED at all 8 samples; clip_scale_factor 0.54-0.98 (GRAD_E_CLIP materially active)"
+
+  - test_id: CERT-OB-T11-1
+    theorem_claim_id: T11
+    obligation_id: OB-T11-1
+    test_path: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_dissipation_pd"
+    suite: certificate
+    evidence_type: structural_regression
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "r_{eps,star} lower bound via lambda_min(M_theta) (shared computation with CERT-OB-T2-1)"
+    domain_checked: "n/a — M is state-independent, holds for any Gamma_{eps,star} without needing it to be defined"
+    quantifier_approximation: "none"
+    method: "same eigendecomposition as CERT-OB-T2-1"
+    tolerance: "> 0"
+    soundness_classification: PROVED_BY_CONSTRUCTION
+    expected_output: "lambda_min(M) > 0"
+    last_executed: "2026-08-20"
+    last_result: "PASSED (r_{eps,star} >= 0.004419)"
+
+  - test_id: CERT-OB-T16-1
+    theorem_claim_id: T16
+    obligation_id: OB-T16-1
+    test_path: "Stress_tests/theory_aligned/certificates/structural_checks.py::check_output_port_decoupling"
+    suite: certificate
+    evidence_type: structural_regression
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "distinctness of y_obs vs. y_port code paths + w_passivity config value"
+    domain_checked: "n/a — architectural"
+    quantifier_approximation: "none"
+    method: "static config/code-path inspection"
+    tolerance: "n/a"
+    soundness_classification: PROVED_BY_CONSTRUCTION
+    expected_output: "distinct formulas confirmed; w_passivity reported"
+    last_executed: "2026-08-20"
+    last_result: "PASSED (w_passivity=0.0)"
+
+  - test_id: CERT-OB-T5-1-DIAGNOSTIC
+    theorem_claim_id: T5
+    obligation_id: OB-T5-1
+    test_path: "Stress_tests/theory_aligned/certificates/equilibrium_hessian_probe.py::run_probe"
+    suite: diagnostic_not_canonical_certificate
+    evidence_type: diagnostic
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "gradient norm + Hessian eigenvalues at the ALREADY-STORED candidate well"
+    domain_checked: "single point (minima_states[0] from stress_arrays.npz)"
+    quantifier_approximation: "N/A — single-point diagnostic, does NOT probe 'there exists z_star'"
+    method: "finite-difference gradient (h=1e-4) and double-finite-difference Hessian (h=1e-3)"
+    tolerance: "n/a (diagnostic only)"
+    soundness_classification: NOT_VERIFIED
+    expected_output: "cross-check against audit.json's reported grad norm; report Hessian eigenvalues for information only"
+    last_executed: "2026-08-20"
+    last_result: >-
+      grad norm 104.5497 (audit.json: 104.5496, rel. diff 8.4e-7 -- strong
+      independent cross-check of the JAX pipeline via an unrelated numpy
+      finite-difference path); Hessian eigenvalues all positive
+      (9.15-732.09) at this NON-stationary point -- diagnostic only, does
+      NOT establish OB-T5-1.
+    note: "Explicitly NOT a canonical certificate test: it cannot pass or fail OB-T5-1, only report diagnostic information about the current unresolved state."
+
+  - test_id: FIT-NRMSE-1
+    theorem_claim_id: null
+    obligation_id: null
+    test_path: "Stress_tests/theory_aligned/fitting/fitting_report.py::build_fitting_report"
+    suite: fitting
+    evidence_type: model_fitting_evaluation
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "test NRMSE (already computed at training time, read from audit.json)"
+    domain_checked: "held-out test split, 100 trajectories, full open-loop rollout"
+    quantifier_approximation: "n/a — this is a fitting metric, not a theorem obligation"
+    method: "stdlib json read of stored audit.json; no recomputation"
+    tolerance: "n/a"
+    soundness_classification: NOT_APPLICABLE
+    expected_output: "test_nrmse value + threshold comparison (0.05)"
+    last_executed: "2026-08-20"
+    last_result: "test_nrmse=0.050684541105484; target (<0.05) NOT met (marginally, by 1.4%)"
+
+  - test_id: CERT-OB-T12-1-DIAGNOSTIC
+    theorem_claim_id: T12
+    obligation_id: OB-T12-1
+    test_path: "Stress_tests/theory_aligned/certificates/equilibrium_hessian_probe.py::run_probe"
+    suite: diagnostic_not_canonical_certificate
+    evidence_type: diagnostic
+    applies_to_run: "results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe"
+    verified_object: "finite-difference Hessian eigenvalues at the current (non-stationary) candidate"
+    domain_checked: "single point (minima_states[0])"
+    quantifier_approximation: "N/A -- single-point diagnostic, does NOT establish the local-PL condition, which is only defined at a genuine z_star"
+    method: "double finite-difference Hessian (h=1e-3)"
+    tolerance: "n/a (diagnostic only)"
+    soundness_classification: NOT_VERIFIED
+    expected_output: "eigenvalues reported for information only; positive-definiteness here does NOT certify Prop. hessian_pl"
+    last_executed: "2026-08-20"
+    last_result: "All 8 eigenvalues positive (9.15-732.09) at the non-stationary candidate -- diagnostic only, explicitly does not resolve OB-T12-1."
+    note: "Same script/run as CERT-OB-T5-1-DIAGNOSTIC; listed separately because it maps to a different obligation/claim."
+
+legacy_tests_reclassified_noncanonical:
+  # See metadata/removal_manifest.yaml for full detail on every one of these.
+  - legacy_id: LEGACY-wells
+    original_location: "Stress_tests/suite.py -> discover_minima/filter_converged_wells (audit.json metrics.stress.wells)"
+    reclassified_as: diagnostic
+    reason: "Supports OB-T5-1 but its own convergence tolerance is not met; treated as diagnostic search-status evidence, not a certificate."
+  - legacy_id: LEGACY-boundary-formula
+    original_location: "Stress_tests/suite.py -> certificate_boundary_audit.formula_violation_fraction"
+    reclassified_as: sampled_numerical_check_not_canonical_pass_fail
+    reason: "Sound as a sampled test of T6, but was historically treated as if a passing rate implied certification; reclassified to prevent that overstatement."
+  - legacy_id: LEGACY-boundary-implemented
+    original_location: "Stress_tests/suite.py -> certificate_boundary_audit.implemented_violation_fraction"
+    reclassified_as: out_of_scope_engineering_diagnostic
+    reason: "No theorem in the .tex document concerns the clipped+PGD-attacked 'implemented' quantity directly; useful engineering evidence, not a theorem test (T7)."
+  - legacy_id: LEGACY-fidelity
+    original_location: "Stress_tests/suite.py -> certificate_fidelity"
+    reclassified_as: diagnostic
+    reason: "Quantifies formula-vs-implemented gap on a broader (non-boundary) sample; informative but not itself a theorem obligation."
+  - legacy_id: LEGACY-greedy-adversarial
+    original_location: "Stress_tests/suite.py -> greedy_adversarial_timestep_audit"
+    reclassified_as: empirical_stress_test_not_canonical_pass_fail
+    reason: "Empirical evidence about the discretized+projected surrogate system (T18), using a GREEDY (non-optimal) adversary; cannot certify the continuous-time theorem."
+  - legacy_id: LEGACY-random-piecewise
+    original_location: "Stress_tests/suite.py -> random_piecewise_stress"
+    reclassified_as: empirical_stress_test_not_canonical_pass_fail
+    reason: "Same as LEGACY-greedy-adversarial, with a random (non-adversarial) input; weaker still."
+  - legacy_id: LEGACY-frontier
+    original_location: "Stress_tests/suite.py -> robustness_frontier / compute_robustness_frontier"
+    reclassified_as: diagnostic_visualization
+    reason: "Visualizes T9's quantity space but never computes T9's own closed-form rho*_{eps,star}; useful diagnostic, not a certificate."
+  - legacy_id: LEGACY-pytest-certificate-math
+    original_location: "Stress_tests/Additional_tests/tests/test_certificate_math.py, test_mapped_disturbance.py"
+    reclassified_as: infrastructure_unit_test
+    reason: "Tests the CORRECTNESS OF THE CERTIFICATE MACHINERY (support-function identities) on random/synthetic parameters, not any trained checkpoint's compliance with a theorem. Left unchanged in place; cited as supporting evidence that the underlying formulas are correctly coded."
+  - legacy_id: LEGACY-pytest-smoke
+    original_location: "Stress_tests/Additional_tests/tests/test_smoke.py, test_deep_dissipative_nlink_shapes.py"
+    reclassified_as: infrastructure_unit_test
+    reason: "API/shape regression tests on random parameters; software engineering value, no theorem-traceability."
+  - legacy_id: LEGACY-pytest-duffing-physics
+    original_location: "Stress_tests/Additional_tests/tests/test_duffing_physics.py"
+    reclassified_as: infrastructure_unit_test_different_experiment
+    reason: "Verifies the DUFFING ground-truth generator's port-Hamiltonian form, not any learned/trained model; out of scope for the copilotA1 (deep_dissipative_nlink) certificate, but a useful precedent for application-agnostic structural checks."
+  - legacy_id: LEGACY-pytest-dispatch-paths
+    original_location: "Stress_tests/Additional_tests/tests/test_experiment_dispatch_guard.py, test_experiment_paths.py"
+    reclassified_as: infrastructure_unit_test_unrelated_to_theory
+    reason: "Software-safety regression tests (config routing, path isolation); no theorem relevance at all."
+  - legacy_id: LEGACY-pytest-windowing
+    original_location: "Stress_tests/Additional_tests/tests/test_nlink_windowing.py"
+    reclassified_as: infrastructure_unit_test_supports_fitting_integrity
+    reason: "Confirms train/test windows never cross a trajectory boundary -- relevant to the INTEGRITY of the fitting evaluation's data hygiene, not to any theorem obligation."

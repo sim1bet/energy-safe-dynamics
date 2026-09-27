@@ -1,0 +1,13 @@
+experiment: deep_dissipative_nlink
+run_id: copilot_A1_full_stageA_recipe
+run_dir: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe
+config_path: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/config/config.json
+audit_path: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/audits/audit.json
+target_metric: test_nrmse
+target_threshold: 0.05
+target_direction: lower_is_better
+notes: >-
+  This config file is application-agnostic in SHAPE (any experiment following
+  the shared experiment_paths.py/post_training_eval.py run-directory layout
+  can supply an equivalent file); the VALUES here are specific to the
+  copilotA1 instance being certified in this pass.

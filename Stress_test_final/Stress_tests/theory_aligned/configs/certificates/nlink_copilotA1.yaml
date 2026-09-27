@@ -1,0 +1,23 @@
+experiment: deep_dissipative_nlink
+run_id: copilot_A1_full_stageA_recipe
+theory_source: iclr2027_conference_robust_extensions_red.tex
+checkpoint_path: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/checkpoints/params.pkl
+config_path: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/config/config.json
+stress_arrays_npz: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/stress_tests/arrays/stress_arrays.npz
+audit_json: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/audits/audit.json
+enabled_certificate_tests:
+  - CERT-OB-T1-1
+  - CERT-OB-T2-1
+  - CERT-OB-T3-1
+  - CERT-OB-T11-1
+  - CERT-OB-T16-1
+enabled_diagnostics:
+  - CERT-OB-T5-1-DIAGNOSTIC
+  - CERT-OB-T12-1-DIAGNOSTIC
+notes: >-
+  This config file is application-agnostic in SHAPE: the same
+  checkpoint_io.py/structural_checks.py/unforced_dissipativity_probe.py/
+  equilibrium_hessian_probe.py scripts apply to any checkpoint produced by
+  the shared EBM_model package (duffing_doublewell, or a future
+  nonlinearbenchmark.org-style task), by pointing this config's paths at a
+  different run. Only these path VALUES are copilotA1-specific.
