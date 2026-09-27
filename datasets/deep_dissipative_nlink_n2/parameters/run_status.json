@@ -1,0 +1,10 @@
+{
+  "training_complete": true,
+  "reconstruction_evaluation_complete": true,
+  "signal_plots_complete": true,
+  "trajectory_plots_complete": true,
+  "stress_tests_complete": true,
+  "stress_plots_complete": true,
+  "theory_aligned_certificates_complete": true,
+  "audit_complete": true
+}
