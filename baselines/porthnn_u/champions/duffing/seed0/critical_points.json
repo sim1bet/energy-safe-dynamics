@@ -1,0 +1,52 @@
+{
+  "critical_points": [
+    {
+      "classification": "minimum",
+      "energy": -4.8006672859191895,
+      "gradient_norm": 6.820944520313788e-08,
+      "hessian_eigenvalues": [
+        1.0009969950436095,
+        1.959116649556305
+      ],
+      "label": "left_minimum",
+      "solver_message": "The solution converged.",
+      "solver_success": true,
+      "state": [
+        -0.9988782826081948,
+        0.0016277119979673637
+      ]
+    },
+    {
+      "classification": "saddle",
+      "energy": -4.564535617828369,
+      "gradient_norm": 2.356080486265455e-08,
+      "hessian_eigenvalues": [
+        -0.8570856045765977,
+        1.0108182024045091
+      ],
+      "label": "saddle",
+      "solver_message": "The solution converged.",
+      "solver_success": true,
+      "state": [
+        0.0015299100076507084,
+        0.0003248693924858883
+      ]
+    },
+    {
+      "classification": "minimum",
+      "energy": -4.810083866119385,
+      "gradient_norm": 9.497664166246977e-08,
+      "hessian_eigenvalues": [
+        1.0010433958228369,
+        1.9219590856377344
+      ],
+      "label": "right_minimum",
+      "solver_message": "The solution converged.",
+      "solver_success": true,
+      "state": [
+        0.9988047220623373,
+        -0.000804159987066829
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "fold": null,
+  "guard": null,
+  "realizations": {
+    "silverbox_train": {
+      "input_mean": -6.403497287976734e-09,
+      "input_std": 1.0,
+      "output_mean": -4.132489461738942e-09,
+      "output_std": 1.0,
+      "sample_count": 51232,
+      "window_counts": {
+        "192": 3187,
+        "384": 3175,
+        "64": 3195,
+        "768": 3151
+      }
+    }
+  }
+}

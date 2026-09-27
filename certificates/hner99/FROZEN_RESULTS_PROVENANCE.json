@@ -1,0 +1,57 @@
+{
+  "protocol": "runtime HNER99 on an empirical 99% Hamiltonian shell",
+  "reports_are_supplied_frozen_results": true,
+  "fresh_recomputation_command": "python scripts/compute_robustness_radii.py",
+  "models": {
+    "ced_phebm": {
+      "contained_checkpoint": "datasets/CED/checkpoints/params.pkl",
+      "checkpoint_sha256": "3b660fbf74eed4ea6c7061f8f794daacf6abf60de7608330c95013fb32233e61",
+      "identity_status": "verified_by_recorded_sha256"
+    },
+    "ced_porthnn_u": {
+      "contained_checkpoint": "baselines/porthnn_u/champions/ced/ced02_07/fold_1/best_validation_parameters.npz",
+      "checkpoint_sha256": "8fff60c5aa0de7ada96df677e4264bf97df7fc727bc6907c69e2ceb59c3f2129",
+      "identity_status": "verified_by_recorded_sha256"
+    },
+    "silverbox_porthnn_u": {
+      "contained_checkpoint": "baselines/porthnn_u/champions/silverbox/sb02_16/best_validation_parameters.npz",
+      "checkpoint_sha256": "51a09b538ed695647472320708090c34f9e76d712d3257bb99e6a61158f509dc",
+      "identity_status": "verified_by_recorded_sha256"
+    },
+    "silverbox_phebm": {
+      "historical_checkpoint_sha256": "1ff2b6a643fd87c23da2c2d4f946eaa02320bdd845d824561aaf4a71869134e1",
+      "identity_status": "checkpoint_not_supplied",
+      "recomputation_available": false
+    },
+    "nanodrone_phebm": {
+      "historical_model": "seed23",
+      "contained_model": "seed47",
+      "contained_checkpoint": "datasets/nanodrone_S3/checkpoints/best_physical_mae.pkl",
+      "contained_checkpoint_sha256": "d84f078f87acdb659aae88a88c3b20a512e36f7ecd15fe8ba25d73188eb3df7a",
+      "identity_status": "historical_report_model_differs_from_contained_champion",
+      "fresh_selector": "nanodrone_phebm_seed47"
+    },
+    "duffing_phebm": {
+      "contained_checkpoint": "datasets/duffing_doublewell/checkpoints/params.pkl",
+      "identity_status": "historical_report_did_not_record_checkpoint_hash",
+      "fresh_selector": "duffing_phebm"
+    },
+    "duffing_porthnn_u": {
+      "contained_checkpoint": "baselines/porthnn_u/champions/duffing/seed0/parameters.npz",
+      "contained_checkpoint_sha256": "de9e1801ba42711f9b31d0e4c06f10c0bf7fd594cf9865a3ba110a3047e50bbd",
+      "identity_status": "historical_report_did_not_record_checkpoint_hash",
+      "fresh_selector": "duffing_porthnn"
+    },
+    "three_link_phebm": {
+      "contained_checkpoint": "datasets/deep_dissipative_nlink_n3/checkpoints/params.pkl",
+      "identity_status": "historical_report_did_not_record_checkpoint_hash",
+      "fresh_selector": "n3_phebm"
+    },
+    "three_link_porthnn_u": {
+      "contained_checkpoint": "baselines/porthnn_u/champions/three_link/full_jrg/seed0/checkpoint_best.npz",
+      "contained_checkpoint_sha256": "e173de487951e16d58222a9a8de2b6eeb4c2b56168b2fc49cc4698131d197733",
+      "identity_status": "historical_report_did_not_record_checkpoint_hash",
+      "fresh_selector": "n3_porthnn"
+    }
+  }
+}

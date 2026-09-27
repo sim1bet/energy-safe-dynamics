@@ -1,0 +1,7 @@
+{
+  "external_commit": "dc5e2088382c1db72bc2ea64d9f0c8e00ae038d6",
+  "official_repository": "https://github.com/shaandesai1/PortHNN",
+  "official_runtime_available": false,
+  "reason": "PyTorch unavailable in host and project container",
+  "status": "adapted reimplementation, not official reproduction"
+}

@@ -1,0 +1,42 @@
+{
+  "dataset": "duffing_doublewell",
+  "model": "porthnn_u",
+  "checkpoint": "results/duffing_doublewell/certificate_experiment_PHNN/external_porthnn/parameters.npz",
+  "q": 0.99,
+  "epsilon_q": -4.510989665985107,
+  "n_validation_states": 40040,
+  "input_dim": 1,
+  "input_active_rank": 1,
+  "input_rms_or_second_moment": [
+    0.06559103727340698
+  ],
+  "input_center": "zero",
+  "runtime_rhs_used": true,
+  "runtime_modified": false,
+  "post_step_projection": false,
+  "ph_identity_exact": true,
+  "max_ph_identity_residual": 0.0,
+  "k_shell_requested": 64,
+  "k_shell_accepted": 64,
+  "max_shell_error": 8.498678005128053e-07,
+  "empirical_kappa": 0.33310996818745336,
+  "near_critical_shell": false,
+  "n_zero_input_outward": 0,
+  "max_zero_input_flux": -5.5652839248184e-07,
+  "input_structure": "nonlinear_scalar",
+  "radius_method": "65_point_grid_brent",
+  "input_search_cap": 4,
+  "hner99_min": 0.0005307474414343915,
+  "hner99_p10": 0.07478843044155481,
+  "hner99_median": 0.39567839603184896,
+  "argmin_state": [
+    1.4493356737150314,
+    -0.05490348052589587
+  ],
+  "shell_32_result": 0.018641460015682294,
+  "shell_64_result": 0.0005307474414343915,
+  "shell_sampling_sensitive": true,
+  "uncertainty": "NOT_ESTIMATED_OPTIONAL",
+  "status": "EMPIRICAL_RUNTIME_HNER",
+  "warnings": "Finite validation-derived shell; empirical numerical radius, not a formal global certificate."
+}

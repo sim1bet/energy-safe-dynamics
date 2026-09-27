@@ -1,0 +1,9 @@
+{
+  "forcing_rmse_on_input_grid": 0.006894147489219904,
+  "learned_damping_parameter_N": -0.2367078810930252,
+  "maximum_trajectory_rmse": 1.2572976350784302,
+  "median_trajectory_rmse": 0.04699504375457764,
+  "physical_damping_parameter_N": -0.4,
+  "test_nrmse": 0.35035363829332944,
+  "test_rmse": 0.24578218162059784
+}

@@ -1,0 +1,60 @@
+{
+  "checkpoint": "checkpoint_best.npz",
+  "data": {
+    "dt_seconds": 0.05,
+    "input_dim": 1,
+    "state": "canonical (q,p), p=M(q)qdot",
+    "steps": 200,
+    "test_split": "ex1_n3nlink.test",
+    "trajectories": 10
+  },
+  "metrics": {
+    "aggregate_nrmse_train_scale": 4.789675370667958,
+    "aggregate_rmse": 0.030310531671838368,
+    "maximum_state_norm_prediction": 0.5691726873962646,
+    "nonfinite_prediction_count": 0,
+    "one_step_rmse": 8.268318621805491e-05,
+    "per_channel_nrmse_train_scale": [
+      3.525186060729933,
+      7.855392510533968,
+      1.5172388328540178,
+      5.054584332184582,
+      2.2420946949926464,
+      5.534797883625147
+    ],
+    "per_channel_rmse": [
+      0.05708596403798498,
+      0.046378407620336556,
+      0.00797316085542858,
+      0.005349964119807126,
+      0.0018738703208747967,
+      0.0026270130840342137
+    ],
+    "ph_ebm_comparable_output_nrmse": 1.2293368742884359,
+    "ph_ebm_comparable_output_rmse": 0.018914773655469362,
+    "quarter_rollout_rmse": [
+      0.002512598573548008,
+      0.008794350236403061,
+      0.02277554756916963,
+      0.05599320299649207
+    ]
+  },
+  "status": "completed held-out evaluation",
+  "structure": {
+    "conservative_power_max_abs": 2.2768245622195593e-18,
+    "dissipative_power_max": -0.000713087665395038,
+    "finite_diagnostics": true,
+    "g_effective_rank_mean": 1.0,
+    "g_singular_value_max": 0.5891630207924617,
+    "g_singular_value_min": 0.5642566591404101,
+    "g_u_norm_mean": 0.018792958296704066,
+    "grad_h_norm_mean": 0.5140768732371437,
+    "j_grad_h_norm_mean": 0.020165816314866664,
+    "j_skew_max_abs": 0.0,
+    "minus_r_grad_h_norm_mean": 0.003706348346004783,
+    "power_balance_residual_max_abs": 6.938893903907228e-18,
+    "r_min_eigenvalue": 0.00016227844343679108,
+    "r_symmetry_max_abs": 0.0,
+    "sample_count": 1024
+  }
+}

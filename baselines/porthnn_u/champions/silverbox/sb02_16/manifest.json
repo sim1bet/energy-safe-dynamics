@@ -1,0 +1,36 @@
+{
+  "artifact_verification_passed": true,
+  "config_id": "sb02_16",
+  "config_sha256": "e51818a302b9720d4755cf4d3b13a4b668e1bd8c419535c0eda1147f259dff93",
+  "data_hashes": {
+    "silverbox_train": "b04cfeb9cdede313295ef80e29434d036030e27785199daba34f49f8aed126ef",
+    "silverbox_validation": "bf8dfe98f468e3fa18d558977107e80cc13f62a482342129fddcb40d8e6f0779"
+  },
+  "finished_utc": "2026-09-23T03:24:11.069482+00:00",
+  "fold": null,
+  "model_schema_version": 4,
+  "module_types": {
+    "dissipation": "full_psd_state_dependent",
+    "input_map": "full_matrix_state_dependent",
+    "interconnection": "canonical_plus_learned_skew",
+    "storage": "existing_porthnn_u"
+  },
+  "official_test_access": "forbidden",
+  "parameter_counts": {
+    "G": 4740,
+    "J": 4870,
+    "R": 5130,
+    "encoder": 21444,
+    "hamiltonian": 81600,
+    "readout": 5
+  },
+  "scheduler_job_id": "58361758",
+  "source_tree_hash": "ad16b3d5cdcf61da71239096ac40fb9f19dea1446afd12e37f145f1e0bca115d",
+  "started_utc": "2026-09-22T17:49:04.451128+00:00",
+  "window_hashes": {
+    "192": "249f9bc86e36b913dea43cbd1f182a23dcb84be96a2d297c905afd91b040b461",
+    "384": "23983eb06e38c27e88b1fb35ddb9c977256aaf18c29687b9e6c5c01d7ca62e39",
+    "64": "533344eb09e45891621ab0c999f18e3171597c9a6bf7aeafb0ece1741d4a7104",
+    "768": "b2db71e4725a7a10aab541cab6de552bea461276b5100ebe8efd57de8a2f7678"
+  }
+}

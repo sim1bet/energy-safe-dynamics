@@ -1,0 +1,35 @@
+{
+  "artifact_verification_passed": true,
+  "config_id": "ced02_07",
+  "config_sha256": "cd2b6d822b2067c55ee93432a387793ead36264ca5bf558069900b55d2381f37",
+  "data_hashes": {
+    "ced_train_1_fold1_source": "6c9de47f7c177a89604fc4d721d150c196c08fc580897c1b38f27daba2f23e6f",
+    "ced_train_2_fold1_source": "df7b39f6cf1fa6c14db5c06fd2501b305033cdf97c7797ccba626fb77ff5f82d"
+  },
+  "finished_utc": "2026-09-23T00:13:06.188133+00:00",
+  "fold": 1,
+  "model_schema_version": 4,
+  "module_types": {
+    "dissipation": "full_psd_state_dependent",
+    "input_map": "full_matrix_state_dependent",
+    "interconnection": "canonical_plus_learned_skew",
+    "storage": "existing_porthnn_u"
+  },
+  "official_test_access": "forbidden",
+  "parameter_counts": {
+    "G": 1218,
+    "J": 1185,
+    "R": 1251,
+    "encoder": 3490,
+    "hamiltonian": 81200,
+    "readout": 3
+  },
+  "scheduler_job_id": "58404563",
+  "source_tree_hash": "ad16b3d5cdcf61da71239096ac40fb9f19dea1446afd12e37f145f1e0bca115d",
+  "started_utc": "2026-09-22T22:07:52.565750+00:00",
+  "window_hashes": {
+    "32": "0689cd8f8a5160a78a6b2099768b4df29295a9b98c4060cf012e61dfc536e575",
+    "64": "0689cd8f8a5160a78a6b2099768b4df29295a9b98c4060cf012e61dfc536e575",
+    "90": "0689cd8f8a5160a78a6b2099768b4df29295a9b98c4060cf012e61dfc536e575"
+  }
+}

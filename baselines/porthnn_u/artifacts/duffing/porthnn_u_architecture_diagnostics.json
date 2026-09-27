@@ -1,0 +1,10 @@
+{
+  "force_derivative_maximum": 0.9892544746398926,
+  "force_derivative_minimum": 0.953418493270874,
+  "force_map_monotone_on_declared_domain": true,
+  "hamiltonian_hessian_eigenvalue_maximum": 6.168030261993408,
+  "hamiltonian_hessian_eigenvalue_minimum": -0.9761282205581665,
+  "hamiltonian_hessian_negative_fraction": 0.18585085165401985,
+  "learned_damping": -0.2367078810930252,
+  "physical_damping": -0.4
+}

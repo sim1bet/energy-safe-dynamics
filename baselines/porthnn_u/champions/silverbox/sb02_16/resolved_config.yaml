@@ -1,0 +1,105 @@
+campaign: generic_ports_nrmse02
+model_schema_version: 4
+development_only: true
+official_test_access: forbidden
+verification_profile: production
+allow_smoke_output_bound_override: false
+max_abs_prediction_limit: 10.0
+model_label: Generalized Latent PortHNN-u (generic pH ports)
+seed: 0
+input_dim: 1
+output_dim: 1
+storage_type: existing_porthnn_u
+storage_hidden_dims:
+- 200
+- 200
+- 200
+storage_activation: tanh
+storage:
+  type: existing_porthnn_u
+  hidden_widths:
+  - 200
+  - 200
+  - 200
+  activation: tanh
+legacy_porthnn_u: false
+precision: float32
+rk_solver: rk4
+input_hold: zero_order_hold
+gradient_clip_global_norm: 1.0
+learning_rate: 0.0002
+learning_rate_end: 2.0e-06
+warmup_updates: 500
+matrix_activation: tanh
+matrix_weight_decay: 1.0e-06
+late_loss_weight_start: 1.0
+late_loss_weight_end: 3.0
+validation_batch_size: 8
+continuous_validation_required: true
+dataset: silverbox
+init_window: 50
+max_horizon: 768
+encoder_hidden_dims:
+- 128
+- 64
+matrix_hidden_dims:
+- 64
+- 64
+r_diagonal: 0.05
+g_jacobian_weight: 1.0e-05
+updates: 10000
+minimum_updates_before_stopping: 3000
+early_stopping_patience: 2000
+validation_interval: 250
+batch_size: 64
+training_window_stride: 16
+window_start_sampling: fixed_stride
+window_start_stride_samples: 16
+sample_every_point: false
+validation_horizons:
+- 64
+- 192
+- 384
+- 768
+training_schedule:
+- until: 10000
+  horizons:
+  - 64
+  - 192
+  - 384
+  probabilities:
+  - 0.15
+  - 0.45
+  - 0.4
+batch_size_h64: 64
+batch_size_h192: 64
+batch_size_h384: 32
+terminal_loss_weight: 0.25
+chained_loss_probability: 0.5
+chained_horizon: 192
+chained_chunks: 4
+validation_score:
+  type: silverbox_continuous
+  weights:
+    '192': 0.1
+    '384': 0.15
+    '768': 0.2
+    full: 0.55
+input_map:
+  type: full_matrix_state_dependent
+  state_dependent: true
+  hidden_widths:
+  - 64
+  - 64
+readout:
+  type: affine_normalized
+  input_feedthrough: false
+config_id: sb02_16
+latent_dim: 4
+interconnection:
+  type: canonical_plus_learned_skew
+dissipation:
+  type: full_psd_state_dependent
+  state_dependent: true
+symmetry_augmentation: true
+symmetry_transform: negate_input_output

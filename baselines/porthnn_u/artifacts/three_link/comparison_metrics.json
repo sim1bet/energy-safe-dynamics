@@ -1,0 +1,20 @@
+{
+  "nominal": {
+    "rmse": 0.5364932069227074,
+    "nrmse": 1.9677664797366168,
+    "finite": true,
+    "trajectories": 100
+  },
+  "ex1_ood": {
+    "rmse": 0.018914773655469362,
+    "nrmse": 1.2293368742884359,
+    "finite": true,
+    "trajectories": 10
+  },
+  "ex2_longstep": {
+    "rmse": 0.35483722891212066,
+    "nrmse": 1.260978417240833,
+    "finite": true,
+    "trajectories": 10
+  }
+}

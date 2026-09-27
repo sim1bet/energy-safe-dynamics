@@ -1,0 +1,20 @@
+{
+  "dataset_files_sha256": {
+    "ex1_n3nlink.test.input.npy": "09f54e0f667cccac86eb4542b62b95782298f5fa6c58ceb2ccb5cad56ab31ab1",
+    "ex1_n3nlink.test.state.npy": "65fce5f0b31d8f4b74a1b7722fa04e1ca5c1d3f19a95d972b0eae511080e3e25",
+    "ex1_n3nlink.train.input.npy": "b44e916534ab92041f4ea68b943ca8d996c5544af3e11a1fef4014cd6e2dcd8e",
+    "ex1_n3nlink.train.state.npy": "148eec3ddff787bc33895934bb2fee71aa3216080bc838b9146c943f52ef426c",
+    "ex2_n3nlink.train.input.npy": "de6db289310644ddb5507efe986015009c16fc713b1d90075d2b3fbf4b3e937a",
+    "ex2_n3nlink.train.state.npy": "49660246e217db897a3734d39199ad97b4aa82f99a5924a56e1e40f0827c3c9e"
+  },
+  "input": "one torque channel, applied to first generalized coordinate by source simulator",
+  "jax": "0.9.2",
+  "python": "3.12.7",
+  "source_tree_sha256": "76721ca0088479f0c8877bd5002fd27f27294e794eb2cfbf3988002e5e302643",
+  "splits": {
+    "test": "ex1 test trajectories 0..9",
+    "train": "ex1 train trajectory 0",
+    "validation": "ex2 train trajectory 0"
+  },
+  "state_source": "dataset (q, qdot); transformed to p=M(q)qdot using NLinkPendulum default mass matrix"
+}

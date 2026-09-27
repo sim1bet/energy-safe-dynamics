@@ -1,0 +1,16 @@
+{
+  "missing": [],
+  "passed": true,
+  "required_artifacts": [
+    "resolved_config.yaml",
+    "normalization.json",
+    "fold_audit.json",
+    "manifest.json",
+    "best_validation_parameters.npz",
+    "final_parameters.npz",
+    "training_history.npz",
+    "continuous_validation_predictions.npz",
+    "metrics_validation.json",
+    "diagnostics/nonzero_input_power.json"
+  ]
+}

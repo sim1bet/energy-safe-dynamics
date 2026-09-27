@@ -1,0 +1,28 @@
+experiment_name: three_link_pendulum_porthnn_u_full_jrg
+model_family: porthnn_u_full_matrix
+state_dim: 6
+input_dim: 1
+state_representation: canonical_q_p_from_dataset_q_qdot
+storage_function: existing_porthnn_u_H_tanh_200x3_scalar
+j_parameterization: state_dependent_full_skew
+r_parameterization: state_dependent_full_psd_cholesky
+g_parameterization: state_dependent_full_matrix
+matrix_head_hidden_widths: [128, 128]
+matrix_head_activation: tanh
+integrator: rk4
+control_hold: zero_order_hold
+rollout_horizons: [16, 32, 64]
+horizon_probabilities: [0.2, 0.3, 0.5]
+batch_size: 32
+optimizer: adam
+learning_rate: 3.0e-4
+warmup_updates: 500
+lr_schedule: cosine
+final_learning_rate: 3.0e-6
+updates: 20000
+validation_interval: 200
+gradient_clip_global_norm: 1.0
+matrix_head_weight_decay: 1.0e-6
+storage_weight_decay: 1.0e-6
+seed: 0
+precision: float64_if_supported

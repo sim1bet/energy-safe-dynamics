@@ -1,0 +1,99 @@
+campaign: generic_ports_nrmse02
+model_schema_version: 4
+development_only: true
+official_test_access: forbidden
+verification_profile: production
+allow_smoke_output_bound_override: false
+max_abs_prediction_limit: 10.0
+model_label: Generalized Latent PortHNN-u (generic pH ports)
+seed: 0
+input_dim: 1
+output_dim: 1
+storage_type: existing_porthnn_u
+storage_hidden_dims:
+- 200
+- 200
+- 200
+storage_activation: tanh
+storage:
+  type: existing_porthnn_u
+  hidden_widths:
+  - 200
+  - 200
+  - 200
+  activation: tanh
+legacy_porthnn_u: false
+precision: float32
+rk_solver: rk4
+input_hold: zero_order_hold
+gradient_clip_global_norm: 1.0
+learning_rate: 0.0002
+learning_rate_end: 2.0e-06
+warmup_updates: 500
+matrix_activation: tanh
+matrix_weight_decay: 3.0e-06
+late_loss_weight_start: 1.0
+late_loss_weight_end: 3.0
+validation_batch_size: 8
+continuous_validation_required: true
+dataset: ced
+init_window: 10
+max_horizon: 90
+encoder_hidden_dims:
+- 64
+- 32
+matrix_hidden_dims:
+- 32
+- 32
+r_diagonal: 0.02
+g_jacobian_weight: 3.0e-05
+updates: 12000
+minimum_updates_before_stopping: 4000
+early_stopping_patience: 2500
+validation_interval: 100
+batch_size: 16
+training_window_stride: 1
+validation_horizons:
+- 32
+- 64
+- 90
+training_schedule:
+- until: 12000
+  horizons:
+  - 32
+  - 64
+  - 90
+  probabilities:
+  - 0.15
+  - 0.25
+  - 0.6
+terminal_loss_weight: 0.2
+validation_score:
+  type: ced_continuous
+  weights:
+    '32': 0.15
+    '64': 0.2
+    '90': 0.2
+    full: 0.45
+  aggregate:
+    mean: 0.6
+    max: 0.25
+    std: 0.15
+input_map:
+  type: full_matrix_state_dependent
+  state_dependent: true
+  hidden_widths:
+  - 32
+  - 32
+config_id: ced02_07
+latent_dim: 2
+interconnection:
+  type: canonical_plus_learned_skew
+dissipation:
+  type: full_psd_state_dependent
+  state_dependent: true
+readout:
+  type: softabs_linear
+  physical_space: true
+  epsilon_scale: 0.001
+  input_feedthrough: false

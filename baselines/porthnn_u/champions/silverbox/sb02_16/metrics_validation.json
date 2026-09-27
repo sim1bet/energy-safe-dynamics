@@ -1,0 +1,63 @@
+{
+  "full_validation": {
+    "silverbox_validation": {
+      "max_abs_prediction": 1.4983794689178467,
+      "nonfinite_count": 0,
+      "normalized_rmse": 0.9448117017745972,
+      "nrmse_std": 0.9448117017745972,
+      "physical_rmse": 0.05163643148997643,
+      "quarter_nrmse": [
+        0.9111969470977783,
+        0.9059993028640747,
+        0.9626637697219849,
+        0.9964346289634705
+      ]
+    }
+  },
+  "max_abs_prediction": 3.516968011856079,
+  "nonfinite_count": 0,
+  "nonzero_input_power": {
+    "P_G": -369.06573486328125,
+    "P_J": 0.0,
+    "P_R": -561.076416015625,
+    "dot_H": -930.142333984375,
+    "power_balance_residual": -0.00018310546875
+  },
+  "normalized_rmse": 0.7780347424743723,
+  "nrmse_std": 0.7780347424743723,
+  "per_horizon": {
+    "192": {
+      "nonfinite_count": 0,
+      "normalized_mse": 0.47568461971577375,
+      "sample_count": 153408
+    },
+    "384": {
+      "nonfinite_count": 0,
+      "normalized_mse": 0.5515884333169849,
+      "sample_count": 302208
+    },
+    "64": {
+      "nonfinite_count": 0,
+      "normalized_mse": 0.5513737505991958,
+      "sample_count": 51648
+    },
+    "768": {
+      "nonfinite_count": 0,
+      "normalized_mse": 0.6717572648642937,
+      "sample_count": 585984
+    }
+  },
+  "physical_rmse": 0.04252163431204399,
+  "rejected": false,
+  "rejection_reasons": [],
+  "sample_count": 1093248,
+  "selection_score": 0.863941428032579,
+  "validation_mse": 0.6053380604971629,
+  "zero_input_power": {
+    "P_G": 0.0,
+    "P_J": 0.0,
+    "P_R": -41.88774108886719,
+    "dot_H": -41.88774108886719,
+    "power_balance_residual": 0.0
+  }
+}

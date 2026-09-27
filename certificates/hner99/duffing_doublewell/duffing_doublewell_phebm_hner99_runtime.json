@@ -1,0 +1,42 @@
+{
+  "dataset": "duffing_doublewell",
+  "model": "phebm",
+  "checkpoint": "results/duffing_doublewell/runs/duffing_v5_champion_exact_seed4/checkpoints/params.pkl",
+  "q": 0.99,
+  "epsilon_q": 0.017014479264616966,
+  "n_validation_states": 40040,
+  "input_dim": 1,
+  "input_active_rank": 1,
+  "input_rms_or_second_moment": [
+    0.06559103727340698
+  ],
+  "input_center": "zero",
+  "runtime_rhs_used": true,
+  "runtime_modified": true,
+  "post_step_projection": true,
+  "ph_identity_exact": false,
+  "max_ph_identity_residual": 0.0007214977041865855,
+  "k_shell_requested": 64,
+  "k_shell_accepted": 64,
+  "max_shell_error": 5.114366764050193e-07,
+  "empirical_kappa": 0.36173058116016604,
+  "near_critical_shell": false,
+  "n_zero_input_outward": 0,
+  "max_zero_input_flux": -0.03794719229477233,
+  "input_structure": "nonlinear_scalar",
+  "radius_method": "65_point_grid_brent",
+  "input_search_cap": 4,
+  "hner99_min": 0.4117706907424981,
+  "hner99_p10": 0.4473125926439613,
+  "hner99_median": 0.6567320007353407,
+  "argmin_state": [
+    0.015441055250209796,
+    0.36970933536564626
+  ],
+  "shell_32_result": 0.4117706907424981,
+  "shell_64_result": 0.4117706907424981,
+  "shell_sampling_sensitive": false,
+  "uncertainty": "NOT_ESTIMATED_OPTIONAL",
+  "status": "POST_STEP_PROJECTION_DIAGNOSTIC_ONLY",
+  "warnings": "Finite validation-derived shell; empirical numerical radius, not a formal global certificate."
+}
