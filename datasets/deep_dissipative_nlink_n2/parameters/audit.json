@@ -1,0 +1,554 @@
+{
+  "experiment_name": "deep_dissipative_nlink",
+  "run_id": "copilot_A1_full_stageA_recipe",
+  "seed": 0,
+  "epsilon": 621.5326171875004,
+  "gamma": 1.0,
+  "metrics": {
+    "epsilon_shell_selection": {
+      "epsilon": 621.5326171875004,
+      "H_min": -6329.7626953125,
+      "quantile_energy": 6319.359375,
+      "quantile": 0.95,
+      "margin_fraction": 0.1,
+      "n_states_used": 256
+    },
+    "mode": "output_only",
+    "reconstruction": {
+      "rmse": 0.0090667475014925,
+      "nrmse": 0.050572444137175314,
+      "mae": 0.006101734470576048,
+      "per_trajectory_rmse": [
+        0.008589197881519794,
+        0.009993836283683777,
+        0.009270844981074333,
+        0.011123770847916603,
+        0.007805132772773504,
+        0.009129250422120094,
+        0.007697151042521,
+        0.010048183612525463,
+        0.010061360895633698,
+        0.011075558140873909,
+        0.006906896363943815,
+        0.010988219641149044,
+        0.010191039182245731,
+        0.01000344380736351,
+        0.00880091916769743,
+        0.00768818985670805,
+        0.013753616251051426,
+        0.0096980519592762,
+        0.011340790428221226,
+        0.009391161613166332,
+        0.00819480698555708,
+        0.008029930293560028,
+        0.00800787191838026,
+        0.008276832289993763,
+        0.008200583979487419,
+        0.00978797022253275,
+        0.011398826725780964,
+        0.006004361901432276,
+        0.009632403962314129,
+        0.006982605438679457,
+        0.007168300449848175,
+        0.00650941813364625,
+        0.009286906570196152,
+        0.009029487147927284,
+        0.01130622811615467,
+        0.009727053344249725,
+        0.006927423179149628,
+        0.009394013322889805,
+        0.010488694533705711,
+        0.009019246324896812,
+        0.007161016575992107,
+        0.009732447564601898,
+        0.008768973872065544,
+        0.006906029302626848,
+        0.00858224742114544,
+        0.012588351033627987,
+        0.012140436097979546,
+        0.008752754889428616,
+        0.012610378675162792,
+        0.008263086900115013,
+        0.009009133093059063,
+        0.008126724511384964,
+        0.00731338607147336,
+        0.009105694480240345,
+        0.00679325545206666,
+        0.007241478655487299,
+        0.007190662436187267,
+        0.006573772057890892,
+        0.007876301184296608,
+        0.008572476916015148,
+        0.008074908517301083,
+        0.007716631516814232,
+        0.010542106814682484,
+        0.009324347600340843,
+        0.0071456171572208405,
+        0.00834781676530838,
+        0.008241867646574974,
+        0.00986174400895834,
+        0.009157704189419746,
+        0.00853182002902031,
+        0.007894007489085197,
+        0.006339204031974077,
+        0.009207453578710556,
+        0.01207407470792532,
+        0.010134113021194935,
+        0.009766820818185806,
+        0.007709127850830555,
+        0.007918808609247208,
+        0.009065298363566399,
+        0.009874864481389523,
+        0.011732992716133595,
+        0.005432811565697193,
+        0.008197776973247528,
+        0.008581453002989292,
+        0.010630100965499878,
+        0.009657451882958412,
+        0.012554892338812351,
+        0.00810693297535181,
+        0.00733449449762702,
+        0.007492258213460445,
+        0.013145117089152336,
+        0.006119350902736187,
+        0.006103361491113901,
+        0.00992751307785511,
+        0.008417731150984764,
+        0.00865662656724453,
+        0.008642593398690224,
+        0.00659722788259387,
+        0.007078259252011776,
+        0.008984568528831005
+      ],
+      "selected_trajectories": {
+        "best": 81,
+        "median": 47,
+        "worst": 16,
+        "fixed_0": 0
+      },
+      "saved_plots": {
+        "best": "<REDACTED_LEGACY_PATH>",
+        "median": "<REDACTED_LEGACY_PATH>",
+        "worst": "<REDACTED_LEGACY_PATH>",
+        "fixed_0": "<REDACTED_LEGACY_PATH>"
+      }
+    },
+    "stress": {
+      "epsilon": 621.5326171875004,
+      "gamma": 1.0,
+      "config": {
+        "seed": 0,
+        "n_boundary_directions": 768,
+        "boundary_bisection_steps": 60,
+        "boundary_initial_radius": 0.05,
+        "boundary_max_radius": 50.0,
+        "boundary_energy_tolerance": 0.0001,
+        "n_rollouts": 96,
+        "horizon_steps": 2000,
+        "boundary_inset": 0.005,
+        "random_piecewise_hold": 25,
+        "timestep_multipliers": [
+          1.0,
+          0.5,
+          0.25
+        ],
+        "cbf_slack_tolerance": 1e-05,
+        "barrier_tolerance": 1e-05,
+        "n_fidelity_samples": 4096,
+        "implemented_attack_steps": 40,
+        "implemented_attack_restarts": 4,
+        "implemented_attack_lr": 0.08,
+        "frontier_grid_size": 81,
+        "frontier_max_input_scale": 2.0,
+        "frontier_max_disturbance_scale": 2.0,
+        "uncertainty": {
+          "input_norm": "linf",
+          "input_center": null,
+          "input_radius": 1.0,
+          "state_disturbance_norm": "l2",
+          "state_disturbance_radius": 0.0,
+          "disturbance_map": null
+        },
+        "projection": {
+          "plane_method": "auto",
+          "landscape_mode": "both",
+          "grid_size": 141,
+          "padding_fraction": 0.18,
+          "n_minima_starts": 192,
+          "minima_steps": 300,
+          "minima_lr": 0.02,
+          "minima_cluster_tol": 0.12,
+          "max_wells_to_show": 12,
+          "profile_steps": 120,
+          "profile_lr": 0.03,
+          "profile_restarts": 4,
+          "profile_chunk_size": 2048,
+          "profile_state_radius": null,
+          "extent_quantile_low": 0.01,
+          "extent_quantile_high": 0.99,
+          "ensure_closed_safety_contour": true,
+          "max_extent_expansions": 2,
+          "extent_expansion_factor": 1.45
+        }
+      },
+      "compatibility": {
+        "certificate_affine_in_input": true,
+        "runtime_flags": {
+          "USE_INPUT_GAIN": false,
+          "USE_SATURATING_INPUT": false,
+          "USE_STATE_DAMPING": false,
+          "GRAD_E_CLIP": 200.0,
+          "XDOT_CLIP": 200.0,
+          "STATE_NORM_CLIP": 50.0,
+          "VF_SCALE": 1.0
+        },
+        "warnings": [
+          "The controller formula uses the model's direction-preserving clipped energy gradient and omits the outer elementwise XDOT soft saturation. Use certificate_fidelity_audit to verify that these numerical safeguards are inactive/negligible throughout the claimed certified set."
+        ]
+      },
+      "wells": {
+        "count": 1,
+        "energies": [
+          -6329.7626953125
+        ],
+        "multiplicities": [
+          1
+        ],
+        "grad_norms": [
+          104.45672607421875
+        ],
+        "max_grad_norm": 104.45672607421875
+      },
+      "profile_optimization": {
+        "median_orthogonal_grad_norm": 9.774860576014897,
+        "p99_orthogonal_grad_norm": 332.9237603420452,
+        "max_orthogonal_grad_norm": 690.551281308361
+      },
+      "plane": {
+        "method": "safety_pca",
+        "extent_expansions": 1,
+        "safety_contour_touches_grid_edge": false,
+        "center": [
+          -7.160295486450195,
+          5.633792877197266,
+          3.31364107131958,
+          -7.8196635246276855,
+          -3.654092788696289,
+          0.18562844395637512,
+          4.992154598236084,
+          1.2781926393508911
+        ],
+        "basis": [
+          [
+            -0.6764967637927519,
+            -0.013381269396490076
+          ],
+          [
+            -0.5864420046364222,
+            -0.155461786109
+          ],
+          [
+            -0.2693161985985804,
+            -0.4213643913107477
+          ],
+          [
+            0.039714788652113385,
+            -0.3814058219402107
+          ],
+          [
+            -0.16500669040495336,
+            0.7311661935025497
+          ],
+          [
+            -0.281954094625907,
+            0.14860631855067455
+          ],
+          [
+            -0.1232234983712969,
+            0.3074046964829242
+          ],
+          [
+            0.04919425378135016,
+            0.03806225900576838
+          ]
+        ],
+        "x_limits": [
+          -79.90119092146746,
+          75.55410550482209
+        ],
+        "y_limits": [
+          -77.93162216410231,
+          77.82292123962613
+        ]
+      },
+      "boundary": {
+        "n_points": 105,
+        "failed_ray_fraction": 0.86328125,
+        "max_abs_energy_residual": 1.32293701171875,
+        "max_state_norm": 58.19248962402344,
+        "fraction_beyond_runtime_state_clip": 0.42857142857142855
+      },
+      "certificate_boundary_audit": {
+        "n_states": 105,
+        "min_h": -1.32293701171875,
+        "max_abs_boundary_h": 1.32293701171875,
+        "min_robust_formula_slack": -63.89292907714844,
+        "min_robust_implemented_slack_at_formula_input": -1611.474853515625,
+        "min_robust_implemented_slack": -1611.4747314453125,
+        "formula_violation_fraction": 0.047619047619047616,
+        "implemented_violation_fraction_at_formula_input": 0.12380952380952381,
+        "implemented_violation_fraction": 0.12380952380952381,
+        "max_formula_vs_implemented_hdot_gap_at_formula_input": 1996.21630859375,
+        "median_formula_vs_implemented_hdot_gap_at_formula_input": 109.91317749023438,
+        "pgd_improvement_in_worst_hdot_max": 0.00048828125
+      },
+      "robustness_frontier": {
+        "nominal_grid_slack": -63.89292907714844,
+        "nominal_input_scale_grid": 1.0,
+        "nominal_disturbance_scale_grid": 1.0,
+        "max_input_scale": 2.0,
+        "max_disturbance_scale": 2.0
+      },
+      "certificate_fidelity": {
+        "max_abs_hdot_gap": 2287.078369140625,
+        "median_abs_hdot_gap": 42.39868927001953,
+        "p99_abs_hdot_gap": 988.5390625,
+        "max_relative_hdot_gap": 181.32516479492188,
+        "formula_violation_fraction": 0.00048828125,
+        "implemented_violation_fraction": 0.018798828125
+      },
+      "greedy_adversarial_timestep_audit": {
+        "1.0": {
+          "dt": 0.05,
+          "steps": 2000,
+          "violation_fraction": 0.0,
+          "min_h": 272.2103271484375,
+          "median_min_h": 401.81512451171875,
+          "min_implemented_slack": -1580.1148681640625,
+          "max_state_clip_displacement": 18.64348793029785
+        },
+        "0.5": {
+          "dt": 0.025,
+          "steps": 4000,
+          "violation_fraction": 0.0,
+          "min_h": 271.4967041015625,
+          "median_min_h": 399.235595703125,
+          "min_implemented_slack": -1580.1148681640625,
+          "max_state_clip_displacement": 16.919275283813477
+        },
+        "0.25": {
+          "dt": 0.0125,
+          "steps": 8000,
+          "violation_fraction": 0.0,
+          "min_h": 271.1247863769531,
+          "median_min_h": 398.1746826171875,
+          "min_implemented_slack": -1580.1148681640625,
+          "max_state_clip_displacement": 16.91704750061035
+        }
+      },
+      "random_piecewise_stress": {
+        "violation_fraction": 0.0,
+        "min_h": 272.2751159667969,
+        "median_min_h": 403.7204895019531,
+        "max_state_clip_displacement": 18.648086547851562
+      },
+      "outputs": {
+        "landscape_figure": "<REDACTED_LEGACY_PATH>",
+        "landscape_preview": "<REDACTED_LEGACY_PATH>",
+        "profile_3d_figure": "<REDACTED_LEGACY_PATH>",
+        "profile_stationarity_figure": "<REDACTED_LEGACY_PATH>",
+        "adversarial_figure": "<REDACTED_LEGACY_PATH>",
+        "robustness_frontier_figure": "<REDACTED_LEGACY_PATH>",
+        "arrays": "<REDACTED_LEGACY_PATH>"
+      }
+    },
+    "epsilon": 621.5326171875004,
+    "gamma": 1.0,
+    "theory_aligned_certificates": {
+      "structural_checks": [
+        {
+          "obligation_id": "OB-T1-1",
+          "description": "J (interconnection matrix) is exactly skew-symmetric: max|J+J^T| == 0 up to float rounding.",
+          "passed": true,
+          "quantitative_evidence": {
+            "max_abs_skew_defect": 0.0,
+            "matrix_shape": [
+              8,
+              8
+            ]
+          },
+          "method": "Exact algebraic identity of the A=upper-upper.T construction, recomputed in float64 numpy from the checkpoint's trained e_A entries (no JAX, no autodiff, no sampling of states).",
+          "theorem_ref": "iclr2027...tex eq.(ph_dynamics); cross-audit row T1"
+        },
+        {
+          "obligation_id": "OB-T2-1",
+          "description": "R (dissipation matrix) is symmetric with lambda_min(R) > 0 (strict PD).",
+          "passed": true,
+          "quantitative_evidence": {
+            "max_abs_symmetry_defect": 0.0,
+            "lambda_min": 0.002920601677479299,
+            "lambda_max": 0.38809343776111654,
+            "condition_number": 132.88133084141438,
+            "cholesky_diag_min": 0.22313016014842982,
+            "cholesky_diag_max": 0.31592964064178874,
+            "matrix_shape": [
+              8,
+              8
+            ]
+          },
+          "method": "Exact eigenvalue decomposition (numpy.linalg.eigvalsh, float64) of M=L@L.T recomputed from the checkpoint's trained Cholesky entries (L_M). Because the parameterization forces diag(L)=exp(clip(.))>0, L is triangular with a strictly nonzero diagonal for ANY parameter values, so M=L@L.T is PD by construction; this check additionally confirms it numerically for the ACTUAL trained L, catching any future code regression that could silently reintroduce a zero row.",
+          "theorem_ref": "iclr2027...tex eq.(ph_dynamics) R>=0; cross-audit rows T2/T11"
+        },
+        {
+          "obligation_id": "OB-T16-1",
+          "description": "Fitted output and dissipativity port output are computed by architecturally distinct formulas (no shared readout parameters).",
+          "passed": true,
+          "quantitative_evidence": {
+            "y_obs_formula": "C_state @ x + c_bias",
+            "y_port_formula": "B.T @ softclipnorm(grad_H(x), GRAD_E_CLIP)",
+            "shared_parameters": [
+              "none directly; y_obs uses C_state/c_bias(/D_feed), y_port uses B and the energy gradient"
+            ],
+            "w_passivity": 0.0,
+            "note": "w_passivity>0 is the ONLY training-time path that couples y_port to the loss (via energy_consistency_loss); for this config w_passivity=0.0, so y_port never entered training at all."
+          },
+          "method": "Static inspection of vector_field_and_output's two return values (y_port, y_obs) against the theory's explicit remark that these are deliberately different quantities; confirmed by config inspection (w_passivity value) rather than a numeric computation.",
+          "theorem_ref": "iclr2027...tex remark after eq.(port_output); cross-audit row T16"
+        }
+      ],
+      "unforced_dissipativity_probe": {
+        "obligation_id": "OB-T3-1",
+        "method": "Finite-difference (central, h=1e-4) approximation of grad(H_theta) at randomly sampled states, combined with the exact (checkpoint-derived) M=L@L.T. NOT an exact autodiff computation (JAX unavailable in this environment); reported as SAMPLED_ONLY / finite-difference-approximate evidence only.",
+        "domain_sampled": "N(0, 5.0^2 I_8) (unstructured Gaussian probe, NOT restricted to the operational ball or anchored to any well)",
+        "n_samples": 8,
+        "finite_diff_step": 0.0001,
+        "results": [
+          {
+            "sample_index": 0,
+            "state_norm": 9.313264892989933,
+            "raw_grad_norm_finite_diff": 93.02328403387818,
+            "clipped_grad_norm": 86.84900853174356,
+            "clip_scale_factor": 0.9336265584873782,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 366.2228711690632,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 319.22129712117425
+          },
+          {
+            "sample_index": 1,
+            "state_norm": 15.834188593194762,
+            "raw_grad_norm_finite_diff": 156.00626737732938,
+            "clipped_grad_norm": 130.54493841733412,
+            "clip_scale_factor": 0.8367929097462962,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 1226.4955771784744,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 858.8196445091643
+          },
+          {
+            "sample_index": 2,
+            "state_norm": 10.12709769901895,
+            "raw_grad_norm_finite_diff": 325.41991273872,
+            "clipped_grad_norm": 185.12948382267246,
+            "clip_scale_factor": 0.5688941474559153,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 6528.516592322563,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 2112.8927072145425
+          },
+          {
+            "sample_index": 3,
+            "state_norm": 9.418794516590802,
+            "raw_grad_norm_finite_diff": 77.57561175291134,
+            "clipped_grad_norm": 73.90589604952292,
+            "clip_scale_factor": 0.9526949820895135,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 298.24793369261954,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 270.6980947061142
+          },
+          {
+            "sample_index": 4,
+            "state_norm": 9.72044304438872,
+            "raw_grad_norm_finite_diff": 276.7360689930067,
+            "clipped_grad_norm": 176.3545443426417,
+            "clip_scale_factor": 0.6372662045260833,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 3159.144801965424,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 1282.9546578145505
+          },
+          {
+            "sample_index": 5,
+            "state_norm": 17.63232873572762,
+            "raw_grad_norm_finite_diff": 351.3322578733745,
+            "clipped_grad_norm": 188.42578764371785,
+            "clip_scale_factor": 0.5363179253287621,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 5689.516078889722,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 1636.5148643184666
+          },
+          {
+            "sample_index": 6,
+            "state_norm": 14.840920351162326,
+            "raw_grad_norm_finite_diff": 114.4618669610294,
+            "clipped_grad_norm": 103.41064909513335,
+            "clip_scale_factor": 0.9034506586402383,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 577.7890801845127,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 471.6047898972566
+          },
+          {
+            "sample_index": 7,
+            "state_norm": 13.545741225291378,
+            "raw_grad_norm_finite_diff": 179.68178737447232,
+            "clipped_grad_norm": 143.10445412014394,
+            "clip_scale_factor": 0.796432717033819,
+            "drift_raw_nonneg": true,
+            "drift_raw_value": 3529.2475060787506,
+            "drift_clipped_nonneg": true,
+            "drift_clipped_value": 2238.6195961379344
+          }
+        ]
+      },
+      "equilibrium_hessian_probe": {
+        "obligation_ids": [
+          "OB-T5-1",
+          "OB-T12-1"
+        ],
+        "candidate_state": [
+          -7.160295486450195,
+          5.633792877197266,
+          3.31364107131958,
+          -7.8196635246276855,
+          -3.654092788696289,
+          0.18562844395637512,
+          4.992154598236084,
+          1.2781926393508911
+        ],
+        "candidate_source": "minima_states[0] from <REDACTED_LEGACY_PATH> (the SAME candidate 'well' already reported in this run's audit.json; not a new search)",
+        "audit_json_reported_grad_norm": null,
+        "finite_diff_grad_norm": 104.45699841392407,
+        "finite_diff_grad_vs_audit_relative_diff": null,
+        "hessian_eigenvalues": [
+          9.769200893489248,
+          22.2124375637248,
+          41.74030245424096,
+          64.49322526712561,
+          113.88708806810824,
+          305.45247541814825,
+          371.3000470774893,
+          768.4255646895796
+        ],
+        "hessian_symmetry_defect": 0.0,
+        "hessian_min_eig_positive": true,
+        "method": "Central finite-difference gradient (h=1e-4) and central finite-difference Hessian (double-differenced, h=1e-3) of the checkpoint's exact H_theta, evaluated at the run's own already-discovered (and, per the cross-audit, NON-CONVERGED) candidate well. No JAX/autodiff used; no new optimization run.",
+        "interpretation": "This DOES NOT establish OB-T5-1 (existence of a true equilibrium): the gradient norm at this point is expected to be large (matching audit.json), confirming -- via an independent computational path -- that this point is NOT a stationary point of H_theta, consistent with the cross-audit's finding, not a new equilibrium claim. The Hessian eigenvalues reported here describe the LOCAL CURVATURE AT A NON-STATIONARY POINT and therefore CANNOT be used to certify the local-PL condition of Proposition hessian_pl, which is defined only at a genuine z_star with grad(H)=0. Reported for completeness/diagnostic value only."
+      },
+      "errors": {}
+    }
+  },
+  "errors": {}
+}

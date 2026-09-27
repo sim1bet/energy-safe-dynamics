@@ -1,0 +1,170 @@
+{
+  "adaptive_selection_disclosure": "Seeds 11/23 informed post-S2 T2 selection; seeds 47/89 are the unseen confirmation subset.",
+  "allowed_launch_decisions": [
+    "PROCEED_S3_T2_CONFIRMATION",
+    "BLOCK_S3_PREREQUISITES_INCOMPLETE"
+  ],
+  "bootstrap": {
+    "archive": "results/nanodrone/full_physical_mae_v1/policy/S3_T2_BOOTSTRAP_PLAN.npz",
+    "archive_sha256": "3ebded0739fb3f5628a897de831434122064bec63a33d082bf77f1e6fe3f55b5",
+    "expansion": "For each replicate/seed/horizon/family, initialize numpy.random.Generator(PCG64(start_draw_seed)) and draw unit_count indices with replacement; retain BB/pH pairing.",
+    "replicates": 20000,
+    "seed": 20260915,
+    "time_steps_resampled": false
+  },
+  "claim_hierarchy": [
+    "unseen seeds 47/89",
+    "all compliant S3 seeds with adaptive disclosure",
+    "historical consistency"
+  ],
+  "claim_rules": "results/nanodrone/full_physical_mae_v1/policy/S3_T2_CLAIM_RULES.json",
+  "claim_rules_sha256": "f120234336d3ec1bbc7f25a77566c7df74d8831d8ece8ed2eb9cb0270c1e2468",
+  "common_arm": "T2",
+  "common_arm_gate_sha256": "0ad712d7f73ab9de884d7b175ca46db577e8e91cb5379f53b4c57cf8afec9cc4",
+  "depth_decision": "DEFER_DEPTH_SHALLOW_NOT_EXHAUSTED",
+  "depth_gate_sha256": "729cac81b9c241326b0a79277345d333c404c9b64b8762de7c7de0c7d0a47506",
+  "evaluation": {
+    "horizons": [
+      50,
+      100,
+      250,
+      500,
+      1000
+    ],
+    "primary_estimand": "paired pH-minus-BB H500 equal-family physical trajectory MAE",
+    "representative_starts": "results/nanodrone/full_physical_mae_v1/policy/S3_T2_REPRESENTATIVE_STARTS.json",
+    "representative_starts_sha256": "20724cfeaa78970236453059b9e062351c9781b233a0664a776c77e1e7cafe42",
+    "required_outputs": [
+      "position",
+      "velocity",
+      "SO3 orientation",
+      "omega",
+      "closure",
+      "terminal",
+      "displacement",
+      "bias",
+      "finite fraction",
+      "percentiles"
+    ],
+    "starts_sha256": "0ba3030d5ca060ead395e01537158066827ed8cf00d5f8577fdc51acd45703be",
+    "unit_counts": {
+      "100": {
+        "chirp": 296,
+        "random": 296,
+        "square": 91
+      },
+      "1000": {
+        "chirp": 26,
+        "random": 26,
+        "square": 6
+      },
+      "250": {
+        "chirp": 116,
+        "random": 116,
+        "square": 34
+      },
+      "50": {
+        "chirp": 596,
+        "random": 596,
+        "square": 186
+      },
+      "500": {
+        "chirp": 56,
+        "random": 56,
+        "square": 15
+      }
+    }
+  },
+  "failure_policy": {
+    "adaptive_tuning": false,
+    "failed_seed_replacement": false,
+    "poor_result_deletion": false
+  },
+  "frozen_date_utc": "2026-09-15",
+  "melon_authorized": false,
+  "model_contract": {
+    "bb_parameters": 18508,
+    "dt": 0.01,
+    "input_dimension": 4,
+    "integrator": "RK4",
+    "ph_active_parameters": 43738,
+    "ph_storage_network": [
+      128,
+      64
+    ],
+    "readout": "identity",
+    "state_dimension": 12,
+    "state_order": [
+      "p",
+      "v",
+      "r_log",
+      "omega"
+    ]
+  },
+  "objective_definition": {
+    "constants_sha256": "072edc086369c448cb594f06cb2b42d31a84fbc43197eae9b5801b1c64d7910b",
+    "jax_sha256": "fc5a2fde90dc648a7ac619ea4073627236be562ba01ba00f3cb744fe94542487",
+    "torch_sha256": "178017a4ee245c22fa1cdccd956880ce142bef8cde936ebde1fe856a31030510"
+  },
+  "parent_sha256": {
+    "bb": {
+      "11": "eebbab12f9d9b57a789568130a3b02d736ab6e029a021a41655e9e1ddfe219fb",
+      "23": "3b4a11a4c4e93835f7e2185bbc0d3ba71f2b5166787e89cc6168c18ec68e2440",
+      "47": "b0f925d579f35e7bf05df41648a4dd6299e47ec5c54973dd622aa44909ad80e0",
+      "89": "a9bba9488a68926ea0953e3f3ff13064e70ea8d99c4011c0a9384e768a3588f5"
+    },
+    "ph": {
+      "11": "f9f2d31b4c4f15f008620ffcdf31a3bd45de059e03bb6dac1e0215f660b1bfda",
+      "23": "14d114d9c89cca818155f23ac5a7dbaceae49f914356d53b208e9985da8314b5",
+      "47": "9608a427a69840091dff0900ccc74c275b6494b0a6d4483dc373aeac0bc0739d",
+      "89": "07d47b70bd1cf72f22b539ffb4945616b5f2985b82f312a54299c231933dd92b"
+    }
+  },
+  "sampler_sha256": {
+    "11": "65d3cb6854c95879461cebec3644fba888252bed3ffeff201c8799aa96c4fd44",
+    "23": "f4d64ad78f48d4b1786f89787fbdbe3bc3f3d0cf072232f6c6f53c9b8c0a6263",
+    "47": "05c25398ec2c29fac9cd0a115756da78ea1ed0dc8ad3f363b0dcaafe96487b58",
+    "89": "6a0437f32b37df4df4c7019678c18e5a5c4ba337a27d049276a06ef616e84444"
+  },
+  "schema": "nanodrone_s3_t2_confirmation_protocol_v1",
+  "training": {
+    "arm": "T2",
+    "batch_size": 64,
+    "batches_per_epoch": 645,
+    "early_stopping": false,
+    "epochs": 120,
+    "expected_updates": 77400,
+    "final_learning_rate": 1e-07,
+    "grad_clip_norm": 1.0,
+    "horizon": 50,
+    "optimizer": "fresh Adam",
+    "peak_learning_rate": {
+      "bb": 3e-06,
+      "ph": 3e-05
+    },
+    "seeds": [
+      11,
+      23,
+      47,
+      89
+    ],
+    "selector": "minimum equal-family H50 physical-MAE T2 total; canonical equality selects earlier epoch",
+    "validation_epochs": [
+      1,
+      5,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120
+    ],
+    "warmup_epochs": 5
+  }
+}

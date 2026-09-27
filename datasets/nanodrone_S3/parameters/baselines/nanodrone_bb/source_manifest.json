@@ -1,0 +1,20 @@
+{
+  "protected": {
+    "EBM_model/EBM_class.py": "b08a5b6ae9dc4816a8ad6744d0a7b20ad0e143d2958805d3872416c322d50612",
+    "EBM_model/EBM_param_fields.py": "53445e1183a83a6c0cef756bec004d1d52541b9d432aaebf9ca3049d7c04328e",
+    "EBM_model/EBM_rollout.py": "3058be8f6d31a6929ca2901fa01237e230686d2ead69aca71330a6a2317919ee",
+    "EBM_model/EBM_training.py": "6f4bbff2a82fac07ecbd0a51bf7e659d3ca02725567b3b1e6c573c3b4a12a9f1",
+    "Interface_code/NanoDrone_main.py": "23fbb95945d7fed9a9de2e83659538a77fe089911c13d7fac85c4c6f97cc94b5",
+    "nanodrone/bb_ph_parity.py": "8d27b4bb8840aef9285841cf37c78c0462ef309f5876d84a58fdaeabbbde807f",
+    "nanodrone/data.py": "0e6f4a7f8b89dca4f3a2b98157c21843cc9f1c26e9e04a6f325ceceacaecc101",
+    "nanodrone/evaluation.py": "109cbab1f1b3d6cb08de5ac460a38b05ebc6422a31183353af80c64d2f2c379f",
+    "nanodrone/source_objective_protocol.py": "0c6b9670cce13db21674c6c759d4206898e05dd5514371f7034673056e8a0a83"
+  },
+  "upstream": {
+    "dataset/dataset.py": "2c853d683d7dcb0471cef4263402903a695746a3e6ce0c8f7726abf2a73e2c24",
+    "models/models.py": "c8b62bb738fed6a17ce74f21e02adf245610bb280e03e9496a7a56167b132c62",
+    "test/test_residual.py": "0ad66419b7473b2e1955b4b6d3df959072e70e5528a932fb14de8c3f64be043b",
+    "train/losses.py": "5298ebc1b1d9a4a27cadde5692e351e6bcfbb56acec2493d9827f227d4e5b6f4",
+    "train/train_residual.py": "d981aa783ff9990c48a29229ba7d1679dbcd1deb266a59230fe92da360df30e7"
+  }
+}

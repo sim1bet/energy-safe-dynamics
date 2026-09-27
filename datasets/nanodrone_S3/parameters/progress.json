@@ -1,0 +1,71 @@
+{
+  "best": {
+    "epoch": 120,
+    "value": 0.6800303435287484
+  },
+  "epoch": 120,
+  "learning_rate": 1e-07,
+  "next_batch": 0,
+  "updates": 77400,
+  "validation": {
+    "equal_family": {
+      "balanced": 0.7794205326863776,
+      "displacement": 0.023767603463873133,
+      "mean_groups": 0.7559028088677991,
+      "omega": 0.8797483692147167,
+      "orientation": 0.6628262273721189,
+      "position": 0.7499770668939091,
+      "rotation_closure": 0.16393858044746684,
+      "smooth_max": 0.8029382633413311,
+      "terminal_band": 1.039724122003699,
+      "total": 0.6800303435287484,
+      "translation_closure": 0.5654448649593264,
+      "velocity": 0.7310595677313382
+    },
+    "per_family": {
+      "chirp": {
+        "balanced": 0.5896822158122222,
+        "displacement": 0.01829923184326031,
+        "mean_groups": 0.581704413330795,
+        "omega": 0.6332545880503302,
+        "orientation": 0.5577000899602903,
+        "position": 0.5569023653964869,
+        "rotation_closure": 0.08508615282242304,
+        "smooth_max": 0.5976600182936496,
+        "terminal_band": 0.8172111495229222,
+        "total": 0.49975194386987876,
+        "translation_closure": 0.3117387352742555,
+        "velocity": 0.5789605883143892
+      },
+      "random": {
+        "balanced": 0.396072990142259,
+        "displacement": 0.01341400376752319,
+        "mean_groups": 0.39379301007162004,
+        "omega": 0.42809328816881115,
+        "orientation": 0.3405385821457677,
+        "position": 0.41143321550932505,
+        "rotation_closure": 0.014441717630908544,
+        "smooth_max": 0.398352970212898,
+        "terminal_band": 0.5430645246633747,
+        "total": 0.3128562935646748,
+        "translation_closure": 0.07661988162404339,
+        "velocity": 0.39510691585956803
+      },
+      "square": {
+        "balanced": 1.3525063921046514,
+        "displacement": 0.0395895747808359,
+        "mean_groups": 1.2922110032009821,
+        "omega": 1.5778972314250084,
+        "orientation": 1.090240010010299,
+        "position": 1.2815956197759157,
+        "rotation_closure": 0.3922878708890689,
+        "smooth_max": 1.4128018015174455,
+        "terminal_band": 1.7588966918248001,
+        "total": 1.2274827931516914,
+        "translation_closure": 1.3079759779796805,
+        "velocity": 1.2191111990200576
+      }
+    },
+    "selector": "equal_family_total"
+  }
+}

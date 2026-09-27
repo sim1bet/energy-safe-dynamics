@@ -1,0 +1,42 @@
+{
+  "run_id": "0013id7u_plot",
+  "project": "ebm-silverbox",
+  "sweep_id": "lxhc5j5a",
+  "config": {
+    "b_init_scale": 1,
+    "batch_size": 32,
+    "chol_clip_exp": 1.476346324995093,
+    "d": 4,
+    "damping_scale": 0.1925345751077764,
+    "first_layer_type": "softmax",
+    "full_phase_lr_scale": 0.2901149599116754,
+    "grad_clip_norm": 4.161223139502445,
+    "grad_e_clip": 1000,
+    "grad_norm_guard": 10000,
+    "hidden": 128,
+    "layer_dims": [
+      128,
+      64
+    ],
+    "lr": 0.00045948334565906274,
+    "max_bad_updates": 200,
+    "n_epochs": 800,
+    "observation_loss": "huber",
+    "p_1": 2,
+    "rollout_integrator": "rk4",
+    "rollout_stop_grad_epochs": 20,
+    "seq_len": 192,
+    "state_norm_clip": 20,
+    "stride": 16,
+    "trunk_reg_mult": 4.392831769769215,
+    "use_feedthrough": true,
+    "vf_scale": 128,
+    "w_reg": 7.568891677729191e-07,
+    "weight_decay": 0.00019975928546060647,
+    "x0_norm_max": 10,
+    "xdot_clip": 2000,
+    "save_plots": true,
+    "plot_dir": "results/silverbox/plots",
+    "plot_max_points": 6000
+  }
+}

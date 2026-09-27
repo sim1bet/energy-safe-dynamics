@@ -1,0 +1,52 @@
+{
+  "best": {
+    "epoch": 120,
+    "value": 0.8836385195142467
+  },
+  "config_sha256": "7be11427a349d3b8b2c9f2d0abe7e1ffe5815e20f9e419c26bbb5f30efef4970",
+  "environment": {
+    "backend": "torch",
+    "compiled_arches": [
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90",
+      "sm_100",
+      "sm_120",
+      "compute_120"
+    ],
+    "compute_capability": [
+      10,
+      0
+    ],
+    "device": "NVIDIA B200",
+    "torch": "2.8.0a0+34c6371d24.nv25.08",
+    "torch_cuda": "13.0"
+  },
+  "melon_accessed": false,
+  "status": "COMPLETE",
+  "terminal_invariants": {
+    "finite": true,
+    "test_stop_marker_absent": true,
+    "update_records": 77400,
+    "updates": 77400,
+    "validation_epochs": [
+      1,
+      5,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120
+    ],
+    "validation_events": 14
+  },
+  "updates": 77400
+}

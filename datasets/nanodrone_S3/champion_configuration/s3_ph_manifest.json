@@ -1,0 +1,42 @@
+{
+  "architecture": "ph",
+  "jobs": [
+    {
+      "arm": "T2",
+      "parent_sha256": "f9f2d31b4c4f15f008620ffcdf31a3bd45de059e03bb6dac1e0215f660b1bfda",
+      "path": "results/nanodrone/full_physical_mae_v1/configs/s3/s3_ph_T2_seed11.json",
+      "sampler_sha256": "65d3cb6854c95879461cebec3644fba888252bed3ffeff201c8799aa96c4fd44",
+      "seed": 11,
+      "sha256": "a40faaebc04a7f750453fb0dfec7e001c97c5b7e2a1af607e72f452c7351862e"
+    },
+    {
+      "arm": "T2",
+      "parent_sha256": "14d114d9c89cca818155f23ac5a7dbaceae49f914356d53b208e9985da8314b5",
+      "path": "results/nanodrone/full_physical_mae_v1/configs/s3/s3_ph_T2_seed23.json",
+      "sampler_sha256": "f4d64ad78f48d4b1786f89787fbdbe3bc3f3d0cf072232f6c6f53c9b8c0a6263",
+      "seed": 23,
+      "sha256": "6533538c4649232ed5a12cadd4b3337e496686a4ce81f64d2c42c660fddcfdff"
+    },
+    {
+      "arm": "T2",
+      "parent_sha256": "9608a427a69840091dff0900ccc74c275b6494b0a6d4483dc373aeac0bc0739d",
+      "path": "results/nanodrone/full_physical_mae_v1/configs/s3/s3_ph_T2_seed47.json",
+      "sampler_sha256": "05c25398ec2c29fac9cd0a115756da78ea1ed0dc8ad3f363b0dcaafe96487b58",
+      "seed": 47,
+      "sha256": "3654b1d8dfbadf7d98c2e5e9ee8817a8424d1dc8328dec9cef9ab8898c50eae9"
+    },
+    {
+      "arm": "T2",
+      "parent_sha256": "07d47b70bd1cf72f22b539ffb4945616b5f2985b82f312a54299c231933dd92b",
+      "path": "results/nanodrone/full_physical_mae_v1/configs/s3/s3_ph_T2_seed89.json",
+      "sampler_sha256": "6a0437f32b37df4df4c7019678c18e5a5c4ba337a27d049276a06ef616e84444",
+      "seed": 89,
+      "sha256": "438a33f1f9308482f114fbfbb9571822491f2bf329bc3129a3bbf48f2e80f56c"
+    }
+  ],
+  "melon_accessed": false,
+  "protocol_sha256": "25859e3692ba3b3b5dfd6a3ed1cdc4d594a635ebf0a19b4feb44e8b359f56b35",
+  "schema_version": 1,
+  "stage": "S3",
+  "validation_starts_sha256": "0ba3030d5ca060ead395e01537158066827ed8cf00d5f8577fdc51acd45703be"
+}

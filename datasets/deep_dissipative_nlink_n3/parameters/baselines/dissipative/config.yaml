@@ -1,0 +1,77 @@
+method: ddm
+state_dim: 2
+obs_dim: 2
+in_dim: 1
+epoch: 5000
+pre_fit_epoch: -1
+patience: 5
+batch_size: 27
+activation: relu
+optimizer: rmsprop
+lr: 0.0009821645196605544
+v_type: single
+scale_f: 0.4978223163329608
+scale_g: 1.0
+scale_h: 1.0
+scale_j: 1.0
+scale_L: 1.0
+train_valid_ratio: 0.2
+data_train: ./dataset/nlink3_100nlink.train
+data_test: ''
+init_model: studynlink3_100_dissipative_1/trial0076/model/best.checkpoint
+result_path: result_studynlink3_100_dissipative_1
+dissipative_mode: dissipative
+gamma: 2.0
+eps_P: 1.0
+eps_f: 0.01
+eps_g: 0.01
+Q:
+- -1.0
+- 0.0
+- 0.0
+- 0.0
+R:
+- 0.0
+S:
+- 0.5
+- 0.0
+alpha_f: 0.001
+alpha_g: 0.001
+alpha_h: 0.04963862409545437
+one_step_loss: false
+diag_g: false
+diag_j: false
+detach_f: false
+detach_g: false
+detach_h: false
+detach_j: false
+detach_diff_f: false
+detach_diff_g: false
+fix_f: false
+fix_g: false
+fix_h: false
+fix_j: false
+fix_L: false
+with_bn_f: false
+with_bn_g: false
+with_bn_h: false
+with_bn_j: false
+with_bn_L: false
+without_j: true
+identity_h: false
+consistency_h: true
+weight_decay: 3.457748083300178e-08
+hidden_layer_f:
+- 9
+- 24
+hidden_layer_g:
+- 46
+hidden_layer_h: []
+hidden_layer_j:
+- 32
+hidden_layer_L:
+- 32
+residual_f: false
+residual_h: true
+residual_coeff_f: -1.0
+profile: false

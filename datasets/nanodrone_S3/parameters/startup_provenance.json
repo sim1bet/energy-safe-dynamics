@@ -1,0 +1,156 @@
+{
+  "backend": "jax",
+  "environment": {
+    "device_kinds": [
+      "NVIDIA B200"
+    ],
+    "devices": [
+      "cuda:0"
+    ],
+    "jax": "0.9.2"
+  },
+  "files": {
+    "architecture_manifest": {
+      "bytes": 1913,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "ed479dd174b50c142f63d8a50632942bb60fc6f447c1483c1a2f259d69509301"
+    },
+    "config": {
+      "bytes": 1056,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "3654b1d8dfbadf7d98c2e5e9ee8817a8424d1dc8328dec9cef9ab8898c50eae9"
+    },
+    "container": {
+      "bytes": 3724873728,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "1da07fee25a42b363e93773d49870556dd5093a00357ee08f971a52c3ed59713"
+    },
+    "data:chirp_20251017_run1.csv": {
+      "bytes": 2360840,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "00e19738869e223c295232c44771c195f8c2f8c499e5497e27e520c7fc60ca23"
+    },
+    "data:chirp_20251017_run2.csv": {
+      "bytes": 2352232,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "6e5587da5055fc620677aeeb8e016a8e1d8d219464d7b2b82f2667174038c979"
+    },
+    "data:chirp_20251017_run3.csv": {
+      "bytes": 2352015,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "f151f009f23da67551e18b422bc7f2471d9df9dcf0a4e5279b469254bce86f91"
+    },
+    "data:chirp_20251017_run4.csv": {
+      "bytes": 2348369,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "f07baf341a2ee55c84de7867fd7bebccacace2fa4daa8672a7f881631122b30e"
+    },
+    "data:random_20251017_run1.csv": {
+      "bytes": 2346029,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "44b457f31ac71d6f18f8a680f69b909ac3cadbb270051430f2dd722acff4d890"
+    },
+    "data:random_20251017_run2.csv": {
+      "bytes": 2346472,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "64f382ee8c06f71397d6abc42b50b270dc4ba47df5f13ebc3515e43bbfaa0c75"
+    },
+    "data:random_20251017_run3.csv": {
+      "bytes": 2355450,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "716058325a802ea64c772961fd20f21bcf5c1dac6b6dc3d1591dcdf4e69c4ed6"
+    },
+    "data:random_20251017_run4.csv": {
+      "bytes": 2353710,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "15445bf88620a5e875a68e62583a4d77dc514de836d644be5a7e8107686e7d13"
+    },
+    "data:square_20251017_run1.csv": {
+      "bytes": 755523,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "9b458d207d0a5e21933ba7ad16945bf505ab2b3abf6d151a1442cdd705d6c0cc"
+    },
+    "data:square_20251017_run2.csv": {
+      "bytes": 744850,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "3b47b3712915aff4fd301fd0a2f989bbdce0a5ca1af852c923f472ec7d05d084"
+    },
+    "data:square_20251017_run3.csv": {
+      "bytes": 744542,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "199f1de08d8da4830d79c4fff4e62f313af5ff54af9cac53c9d8341d4a73a2d8"
+    },
+    "data:square_20251017_run4.csv": {
+      "bytes": 743660,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "76b6a2e2400612681e65f041ca31e5c6ba6bea063a944d5d4a75481edd82a671"
+    },
+    "paired_sampler": {
+      "bytes": 54655317,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "05c25398ec2c29fac9cd0a115756da78ea1ed0dc8ad3f363b0dcaafe96487b58"
+    },
+    "parent_checkpoint": {
+      "bytes": 587151,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "9608a427a69840091dff0900ccc74c275b6494b0a6d4483dc373aeac0bc0739d"
+    },
+    "protected:EBM_model/EBM_class.py": {
+      "bytes": 8486,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "b08a5b6ae9dc4816a8ad6744d0a7b20ad0e143d2958805d3872416c322d50612"
+    },
+    "protected:EBM_model/EBM_param_fields.py": {
+      "bytes": 27224,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "53445e1183a83a6c0cef756bec004d1d52541b9d432aaebf9ca3049d7c04328e"
+    },
+    "protected:EBM_model/EBM_rollout.py": {
+      "bytes": 7084,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "3058be8f6d31a6929ca2901fa01237e230686d2ead69aca71330a6a2317919ee"
+    },
+    "protected:EBM_model/EBM_training.py": {
+      "bytes": 16064,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "6f4bbff2a82fac07ecbd0a51bf7e659d3ca02725567b3b1e6c573c3b4a12a9f1"
+    },
+    "protected:Interface_code/NanoDrone_main.py": {
+      "bytes": 55105,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "23fbb95945d7fed9a9de2e83659538a77fe089911c13d7fac85c4c6f97cc94b5"
+    },
+    "s3_protocol": {
+      "bytes": 5135,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "25859e3692ba3b3b5dfd6a3ed1cdc4d594a635ebf0a19b4feb44e8b359f56b35"
+    },
+    "source_scalers": {
+      "bytes": 2819,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "2000c925947bf0d73336de1379713967f95f13ecde027cbb221b13e50d4bd071"
+    },
+    "validation_starts": {
+      "bytes": 7539,
+      "path": "<REDACTED_LEGACY_PATH>",
+      "sha256": "0ba3030d5ca060ead395e01537158066827ed8cf00d5f8577fdc51acd45703be"
+    }
+  },
+  "melon_accessed": false,
+  "melon_authorized": false,
+  "model_contract": {
+    "active_parameters": 43738,
+    "dt": 0.01,
+    "input_dimension": 4,
+    "integrator": "RK4",
+    "readout": "identity",
+    "state_dimension": 12,
+    "storage_network": [
+      128,
+      64
+    ]
+  },
+  "run_id": "s3_ph_T2_seed47",
+  "schema": "nanodrone_s3_startup_provenance_v1",
+  "status": "PASS"
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-09-27",
+  "policy": "Raw files with no explicit downstream redistribution license are download-only.",
+  "datasets": {
+    "ced": {
+      "source": "https://www.nonlinearbenchmark.org/benchmarks/coupled-electric-drives",
+      "acquisition": "nonlinear_benchmarks.CED",
+      "license_status": "No explicit dataset redistribution license identified during audit.",
+      "citation": "T. Wigren and M. Schoukens, Coupled Electric Drives Data Set and Reference Models, Technical Report 2017-024, Uppsala University, 2017.",
+      "files": [
+        {"path": "CED/DATAUNIF.MAT", "bytes": 16096, "sha256": "102c8d8012d6e850d50c13227b8c2280fe69f8bc4a845177f8bc3d761d152c89"}
+      ]
+    },
+    "silverbox": {
+      "source": "https://www.nonlinearbenchmark.org/benchmarks/silverbox",
+      "acquisition": "nonlinear_benchmarks.Silverbox",
+      "license_status": "No explicit dataset redistribution license identified during audit.",
+      "citation": "T. Wigren and J. Schoukens, Three free data sets for development and benchmarking in nonlinear system identification, ECC 2013, DOI 10.23919/ECC.2013.6669201.",
+      "files": [
+        {"path": "Silverbox/README.m", "bytes": 1148, "sha256": "90c365916d60afc3cb208f772be40918175370cbcf43d1ada3df19b8a2c58ae8"},
+        {"path": "Silverbox/README.txt", "bytes": 1148, "sha256": "90c365916d60afc3cb208f772be40918175370cbcf43d1ada3df19b8a2c58ae8"},
+        {"path": "Silverbox/SNLS80mV.csv", "bytes": 2649634, "sha256": "ae62d5a91230c10f76e6dd02c8a4fac3c9d4d8a95fbf50e87cb0c4885003e0f1"},
+        {"path": "Silverbox/SNLS80mV.mat", "bytes": 2097520, "sha256": "5c7413a52255af0cb4e2f93fb6903beb92b08965ba1e6ad0a6ffedfed8477ed4"},
+        {"path": "Silverbox/Schroeder80mV.csv", "bytes": 2891573, "sha256": "b22cbcba9c59d9b4b1b379967b669dc32959e515b24784da3254505f8563e36c"},
+        {"path": "Silverbox/Schroeder80mV.mat", "bytes": 2097520, "sha256": "ec5a9740a4789aa20b9d84f387424c0218e843844807b30b367c218778339fb6"}
+      ]
+    },
+    "nanodrone": {
+      "source": "https://github.com/idsia-robotics/nanodrone-sysid-benchmark",
+      "archive": "https://github.com/idsia-robotics/nanodrone-sysid-benchmark/archive/refs/heads/main.zip",
+      "license_status": "Public upstream release; no explicit repository license identified during audit.",
+      "citation": "M. Busetto et al., Nonlinear system identification for a nano-drone benchmark, Control Engineering Practice 172 (2026), 106871.",
+      "files": [
+        {"path": "nanodrone_S3/parameters/raw_data/data/test/melon_20251017_run1.csv", "bytes": 2543109, "sha256": "41137fbe34e8f3ecec17e9c00c99145898677906c1ee662ecf8491afeb4c678e"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/test/melon_20251017_run2.csv", "bytes": 2537432, "sha256": "851771f39ad891428b097242a5c88eed48ae82e24dcb303b5b03b38acdb18dd1"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/test/melon_20251017_run3.csv", "bytes": 2549177, "sha256": "f7bc4e38086d8674d0f7ed8f08bb532ce90b1e7ef97fbb00fb51629e1d1c47ed"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/chirp_20251017_run1.csv", "bytes": 2360840, "sha256": "00e19738869e223c295232c44771c195f8c2f8c499e5497e27e520c7fc60ca23"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/chirp_20251017_run2.csv", "bytes": 2352232, "sha256": "6e5587da5055fc620677aeeb8e016a8e1d8d219464d7b2b82f2667174038c979"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/chirp_20251017_run3.csv", "bytes": 2352015, "sha256": "f151f009f23da67551e18b422bc7f2471d9df9dcf0a4e5279b469254bce86f91"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/chirp_20251017_run4.csv", "bytes": 2348369, "sha256": "f07baf341a2ee55c84de7867fd7bebccacace2fa4daa8672a7f881631122b30e"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/random_20251017_run1.csv", "bytes": 2346029, "sha256": "44b457f31ac71d6f18f8a680f69b909ac3cadbb270051430f2dd722acff4d890"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/random_20251017_run2.csv", "bytes": 2346472, "sha256": "64f382ee8c06f71397d6abc42b50b270dc4ba47df5f13ebc3515e43bbfaa0c75"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/random_20251017_run3.csv", "bytes": 2355450, "sha256": "716058325a802ea64c772961fd20f21bcf5c1dac6b6dc3d1591dcdf4e69c4ed6"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/random_20251017_run4.csv", "bytes": 2353710, "sha256": "15445bf88620a5e875a68e62583a4d77dc514de836d644be5a7e8107686e7d13"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/square_20251017_run1.csv", "bytes": 755523, "sha256": "9b458d207d0a5e21933ba7ad16945bf505ab2b3abf6d151a1442cdd705d6c0cc"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/square_20251017_run2.csv", "bytes": 744850, "sha256": "3b47b3712915aff4fd301fd0a2f989bbdce0a5ca1af852c923f472ec7d05d084"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/square_20251017_run3.csv", "bytes": 744542, "sha256": "199f1de08d8da4830d79c4fff4e62f313af5ff54af9cac53c9d8341d4a73a2d8"},
+        {"path": "nanodrone_S3/parameters/raw_data/data/train/square_20251017_run4.csv", "bytes": 743660, "sha256": "76b6a2e2400612681e65f041ca31e5c6ba6bea063a944d5d4a75481edd82a671"}
+      ]
+    }
+  }
+}

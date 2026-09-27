@@ -1,0 +1,46 @@
+{
+  "run_id": "duffing_v5_champion_exact_seed4",
+  "theory_formula": "rho_star = inf_{Gamma, a_H != 0} delta/||a_H||_*",
+  "regular_boundary_estimate": "(r_min*kappa-w_perp_max)/g_perp_max",
+  "epistemic_status": "Sampled shell estimates of the continuous-boundary extrema; not interval-certified bounds over unsampled states.",
+  "component_summaries": [
+    {
+      "component_index": 0,
+      "n_boundary": 384,
+      "zero_input_feasible": true,
+      "sampled_exact_radius": 0.030953334644436836,
+      "regular_boundary_lower_estimate": 0.008645584006867428,
+      "kappa": 0.27221566438674927,
+      "normal_dissipation_min": 0.03162820637226105,
+      "normal_input_gain_max": 0.9958486557006836,
+      "normal_disturbance_support_max": 0.0
+    },
+    {
+      "component_index": 1,
+      "n_boundary": 384,
+      "zero_input_feasible": true,
+      "sampled_exact_radius": 0.03097895346581936,
+      "regular_boundary_lower_estimate": 0.008683353666434074,
+      "kappa": 0.27342304587364197,
+      "normal_dissipation_min": 0.03162609785795212,
+      "normal_input_gain_max": 0.9958484172821045,
+      "normal_disturbance_support_max": 0.0
+    }
+  ],
+  "well_filter": {
+    "grad_norm_tolerance": 0.05,
+    "retained_original_indices": [
+      0,
+      1
+    ],
+    "retained_grad_norms": [
+      0.005987567361444235,
+      0.0007512796437367797
+    ]
+  },
+  "boundary_projection": {
+    "max_abs_residual_after": 3.1962990760803223e-06,
+    "median_abs_residual_after": 2.1606683731079102e-07
+  },
+  "arrays": "results/duffing_doublewell/runs/duffing_v5_champion_exact_seed4/stress_tests/theory_aligned/radius_certificate.npz"
+}
