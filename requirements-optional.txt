@@ -1,0 +1,3 @@
+# Optional NanoDrone black-box comparator dependency.
+# Install a wheel/build compatible with the selected PyTorch and CUDA versions.
+pytorch3d==0.7.8
