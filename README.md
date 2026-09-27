@@ -6,7 +6,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](requirements.txt)
 [![JAX](https://img.shields.io/badge/JAX-accelerated-8C4FFF)](requirements.txt)
-[![Paper](https://img.shields.io/badge/ICLR-2027-B31B1B)](#paper)
 [![Reproducibility](https://img.shields.io/badge/reproducibility-artifacts_included-0F9D58)](#reproducibility)
 
 **Simone Betteti · Morteza Lahijanian · Luca Laurenti**
