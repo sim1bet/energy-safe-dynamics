@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """
 Offline compute environment training entry point for W&B-generated configs.
 

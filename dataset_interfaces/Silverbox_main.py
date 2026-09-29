@@ -1,3 +1,4 @@
+# Author: Simone Betteti
 # Silverbox_main.py — Robust training entry point for free-EBM pH model
 # v2 update: observation loss defaults moved closer to the authors' supervised objective.
 

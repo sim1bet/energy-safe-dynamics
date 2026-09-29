@@ -1,3 +1,4 @@
+# Author: Simone Betteti
 """State-observed pH-EBM identification for the 2026 Nano-drone benchmark."""
 from __future__ import annotations
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Run a saved champion configuration from the standalone prerelease tree."""
 from __future__ import annotations
 

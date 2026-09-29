@@ -1,3 +1,4 @@
+# Author: Simone Betteti
 """DeepDissipative_NLink_main.py — import the EXACT upstream Deep Dissipative
 Dynamics n-link dataset into our JAX port-Hamiltonian pipeline (prompt §17-22).
 
