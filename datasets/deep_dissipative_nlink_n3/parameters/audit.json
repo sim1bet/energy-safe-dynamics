@@ -385,7 +385,7 @@
             "state_dependent_terms_preserve_construction": true
           },
           "method": "Exact algebraic identity of the J(x)=upper(x)-upper(x).T construction. The constant checkpoint entries are recomputed in float64 numpy; optional state-dependent entry functions cannot alter the identity because they are inserted before antisymmetrization (no JAX or autodiff).",
-          "theorem_ref": "iclr2027...tex eq.(ph_dynamics); cross-audit row T1"
+          "theorem_ref": "reference_robust_extensions.tex eq.(ph_dynamics); cross-audit row T1"
         },
         {
           "obligation_id": "OB-T2-1",
@@ -404,7 +404,7 @@
             ]
           },
           "method": "Exact eigenvalue decomposition (numpy.linalg.eigvalsh, float64) of M=L@L.T recomputed from the checkpoint's trained Cholesky entries (L_M). Because the parameterization forces diag(L)=exp(clip(.))>0, L is triangular with a strictly nonzero diagonal for ANY parameter values, so M=L@L.T is PD by construction; this check additionally confirms it numerically for the ACTUAL trained L, catching any future code regression that could silently reintroduce a zero row.",
-          "theorem_ref": "iclr2027...tex eq.(ph_dynamics) R>=0; cross-audit rows T2/T11"
+          "theorem_ref": "reference_robust_extensions.tex eq.(ph_dynamics) R>=0; cross-audit rows T2/T11"
         },
         {
           "obligation_id": "OB-T16-1",
@@ -420,7 +420,7 @@
             "note": "w_passivity>0 is the ONLY training-time path that couples y_port to the loss (via energy_consistency_loss); for this config w_passivity=0.0, so y_port never entered training at all."
           },
           "method": "Static inspection of vector_field_and_output's two return values (y_port, y_obs) against the theory's explicit remark that these are deliberately different quantities; confirmed by config inspection (w_passivity value) rather than a numeric computation.",
-          "theorem_ref": "iclr2027...tex remark after eq.(port_output); cross-audit row T16"
+          "theorem_ref": "reference_robust_extensions.tex remark after eq.(port_output); cross-audit row T16"
         }
       ],
       "unforced_dissipativity_probe": {
