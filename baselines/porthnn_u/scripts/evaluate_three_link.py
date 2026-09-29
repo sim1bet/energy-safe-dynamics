@@ -1,3 +1,4 @@
+# Author: Simone Betteti
 """Held-out and structural audit for the n=3 full-matrix PortHNN-u run."""
 from __future__ import annotations
 import argparse, json, os, sys

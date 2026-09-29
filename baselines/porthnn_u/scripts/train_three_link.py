@@ -1,3 +1,4 @@
+# Author: Simone Betteti
 """Reproducible rollout trainer for the n=3 full-matrix PortHNN-u."""
 from __future__ import annotations
 import argparse, hashlib, json, os, platform, subprocess, sys, time

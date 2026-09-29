@@ -1,3 +1,4 @@
+# Author: Simone Betteti
 """Train and export the matched PortHNN-u Duffing baseline."""
 from __future__ import annotations
 
