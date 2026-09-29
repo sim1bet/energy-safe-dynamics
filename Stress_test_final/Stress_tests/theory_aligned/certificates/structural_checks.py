@@ -24,7 +24,7 @@ compatible with, the parameterization the theory's proof concerns. They
 cannot detect an error in the theory's proof itself, only a mismatch between
 the claimed architecture and what the checkpoint actually contains.
 
-See ``iclr2027_conference_robust_extensions_red.tex``, eq. (ph_dynamics),
+See ``reference_robust_extensions.tex``, eq. (ph_dynamics),
 and ``results/deep_dissipative_nlink/copilotA1_theory_formal_verification_cross_audit.md``,
 rows T1/T2/T16, for the theorem-level statements these checks map to.
 """
@@ -104,7 +104,7 @@ class ObligationResult:
 def check_skew_symmetry(params: EBMParams, d: int) -> ObligationResult:
     """T1 / obligation OB-T1-1: J = A_theta is exactly skew-symmetric.
 
-    Theory: iclr2027...tex, eq. (ph_dynamics): J(z)^T = -J(z).
+    Theory: reference_robust_extensions.tex, eq. (ph_dynamics): J(z)^T = -J(z).
     """
     A = assemble_A_numpy(np.asarray(params.trunk.e_A), d)
     defect = np.abs(A + A.T)
@@ -122,7 +122,7 @@ def check_skew_symmetry(params: EBMParams, d: int) -> ObligationResult:
              "construction. The constant checkpoint entries are recomputed in float64 "
              "numpy; optional state-dependent entry functions cannot alter the identity "
              "because they are inserted before antisymmetrization (no JAX or autodiff).",
-        theorem_ref="iclr2027...tex eq.(ph_dynamics); cross-audit row T1",
+        theorem_ref="reference_robust_extensions.tex eq.(ph_dynamics); cross-audit row T1",
     )
 
 
@@ -162,7 +162,7 @@ def check_dissipation_pd(params: EBMParams, d: int, chol_clip_exp: float,
                "values, so M=L@L.T is PD by construction; this check additionally "
                "confirms it numerically for the ACTUAL trained L, catching any "
                "future code regression that could silently reintroduce a zero row.",
-        theorem_ref="iclr2027...tex eq.(ph_dynamics) R>=0; cross-audit rows T2/T11",
+        theorem_ref="reference_robust_extensions.tex eq.(ph_dynamics) R>=0; cross-audit rows T2/T11",
     )
 
 
@@ -170,7 +170,7 @@ def check_output_port_decoupling(config: dict) -> ObligationResult:
     """T16 / obligation OB-T16-1: fitted output y_hat != dissipativity port
     output y_p are architecturally distinct code paths.
 
-    Theory (iclr2027...tex, Methods, remark after eq.(port_output)):
+    Theory (reference_robust_extensions.tex, Methods, remark after eq.(port_output)):
     "The measured output y_hat=h_phi(z,u) remains the quantity fitted to
     data, while y_p(z):=G^T grad(H)(z) is the power-conjugate port output
     used only for the energy dissipation analysis." This is a code-path
@@ -208,7 +208,7 @@ def check_output_port_decoupling(config: dict) -> ObligationResult:
                "(y_port, y_obs) against the theory's explicit remark that these are "
                "deliberately different quantities; confirmed by config inspection "
                "(w_passivity value) rather than a numeric computation.",
-        theorem_ref="iclr2027...tex remark after eq.(port_output); cross-audit row T16",
+        theorem_ref="reference_robust_extensions.tex remark after eq.(port_output); cross-audit row T16",
     )
 
 

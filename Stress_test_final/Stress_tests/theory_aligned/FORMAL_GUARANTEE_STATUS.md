@@ -2,7 +2,7 @@
 
 Instance document for run `copilot_A1_full_stageA_recipe`, checkpoint
 `results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/checkpoints/params.pkl`,
-theory source `iclr2027_conference_robust_extensions_red.tex`. Generated
+theory source `reference_robust_extensions.tex`. Generated
 against `metadata/theorem_registry.yaml` / `proof_obligations.yaml`
 (2026-08-20). This document's *structure* is application-agnostic (any
 other run/experiment gets its own instance of this file); the *content*

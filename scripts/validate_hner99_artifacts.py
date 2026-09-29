@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Validate frozen HNER99 reports and their recorded checkpoint provenance."""
 from __future__ import annotations
 

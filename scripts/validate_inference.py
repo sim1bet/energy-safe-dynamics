@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Execute short finite inference rollouts for every bundled benchmark."""
 from __future__ import annotations
 import json, os, pickle, sys

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Aggregate finite-execution and port-Hamiltonian structure smoke tests."""
 from __future__ import annotations
 

@@ -6,6 +6,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](requirements.txt)
 [![JAX](https://img.shields.io/badge/JAX-accelerated-8C4FFF)](requirements.txt)
+[![Paper](https://img.shields.io/badge/ICLR-2027-B31B1B)](#paper)
 [![Reproducibility](https://img.shields.io/badge/reproducibility-artifacts_included-0F9D58)](#reproducibility)
 
 **Simone Betteti · Morteza Lahijanian · Luca Laurenti**
@@ -192,16 +193,11 @@ and high-dimensional flight dynamics.
 
 | Benchmark | Latent state | Hamiltonian | Inputs | Repository support |
 | --- | ---: | --- | ---: | --- |
-| Silverbox | 4 | (128\rightarrow64), softmax (
-ightarrow) polynomial | 1 | pH-EBM interface + PortHNN-u champion |
-| CED | 4 | (96\rightarrow48), softmax (
-ightarrow) polynomial | 1 | pH-EBM champion + PortHNN-u champion |
-| Duffing double well | 2 | (64\rightarrow32), tanh (
-ightarrow) polynomial | 1 | pH-EBM + PortHNN-u + nonconvex certificate figures |
-| 2/3-link pendulum | 8 for reported 3-link pH-EBM | (64\rightarrow32), tanh (
-ightarrow) polynomial | 1 | pH-EBM + DDM + full-(J/R/G) PortHNN-u |
-| NanoDrone S3 | 12 | (128\rightarrow64), tanh (
-ightarrow) polynomial | 4 | pH-EBM + black-box reference + long-horizon tests |
+| Silverbox | 4 | (128\rightarrow64), softmax (ightarrow) polynomial | 1 | pH-EBM interface + PortHNN-u champion |
+| CED | 4 | (96\rightarrow48), softmax (ightarrow) polynomial | 1 | pH-EBM champion + PortHNN-u champion |
+| Duffing double well | 2 | (64\rightarrow32), tanh (ightarrow) polynomial | 1 | pH-EBM + PortHNN-u + nonconvex certificate figures |
+| 2/3-link pendulum | 8 for reported 3-link pH-EBM | (64\rightarrow32), tanh (ightarrow) polynomial | 1 | pH-EBM + DDM + full-(J/R/G) PortHNN-u |
+| NanoDrone S3 | 12 | (128\rightarrow64), tanh (ightarrow) polynomial | 4 | pH-EBM + black-box reference + long-horizon tests |
 
 <details>
 <summary><strong>Headline experimental results from the submitted paper</strong></summary>
@@ -307,6 +303,8 @@ python -m pip install ./dataset_interfaces/baseline_interfaces/deep_dissipative_
 
 **Safe-by-design Learning via Energy-Based Neural Networks**  
 Simone Betteti, Morteza Lahijanian, and Luca Laurenti.  
+Submitted to the International Conference on Learning Representations (ICLR
+2027).
 
 The vector source of the graphical abstract is available as
 [PDF](assets/graphical_abstract.pdf).
@@ -320,7 +318,7 @@ paper. A machine-readable entry is provided in [CITATION.cff](CITATION.cff).
 @inproceedings{betteti2027safebydesign,
   title     = {Safe-by-design Learning via Energy-Based Neural Networks},
   author    = {Betteti, Simone and Lahijanian, Morteza and Laurenti, Luca},
-  booktitle = {arXiv},
+  booktitle = {International Conference on Learning Representations},
   year      = {2027}
 }
 ```

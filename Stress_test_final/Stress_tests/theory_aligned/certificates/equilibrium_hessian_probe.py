@@ -15,7 +15,7 @@ non-JAX computational path) the gradient-norm number already reported in
 that run's ``audits/audit.json`` (``metrics.stress.wells.max_grad_norm``),
 and additionally computes the local Hessian eigenvalues, which the
 existing pipeline never computes at all (see cross-audit obligation
-T12/Proposition `hessian_pl`, `iclr2027_conference_robust_extensions_red.tex`).
+T12/Proposition `hessian_pl`, `reference_robust_extensions.tex`).
 
 Both the gradient and the Hessian here are FINITE-DIFFERENCE
 APPROXIMATIONS (not exact autodiff), and the underlying value is

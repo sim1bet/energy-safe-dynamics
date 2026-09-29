@@ -137,7 +137,7 @@ not_yet_implemented_but_required:
   - obligation_id: OB-T13-1
     required_action: "Implement eq.(input_energy_estimate) once OB-T5-1/OB-T12-1 are resolved."
   - obligation_id: OB-T4-1
-    required_action: "Extend the coercivity proof in Appendix app:hybrid of iclr2027_conference_robust_extensions_red.tex to explicitly cover the bias term in EBM_class.py::energy_layer_k (a THEORY-DOCUMENT action, not a code/test action)."
+    required_action: "Extend the coercivity proof in Appendix app:hybrid of reference_robust_extensions.tex to explicitly cover the bias term in EBM_class.py::energy_layer_k (a THEORY-DOCUMENT action, not a code/test action)."
   - obligation_id: OB-T6-1
     required_action: >-
       Deliberately NOT elevated to a canonical certificate test: OB-T6-1 is

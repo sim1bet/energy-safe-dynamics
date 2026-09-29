@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Aggregate integrity and stored-result audit for all PortHNN-u champions."""
 from __future__ import annotations
 

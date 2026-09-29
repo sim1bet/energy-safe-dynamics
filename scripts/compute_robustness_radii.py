@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Reviewer-facing launcher for the integrated runtime_hner99 package."""
 from __future__ import annotations
 import sys
@@ -8,4 +9,3 @@ sys.path.insert(0, str(ROOT))
 from runtime_hner99.runtime import main
 if __name__ == "__main__":
     main()
-

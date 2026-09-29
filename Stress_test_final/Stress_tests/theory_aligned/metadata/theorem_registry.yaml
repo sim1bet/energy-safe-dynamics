@@ -9,7 +9,7 @@
 # register its own claims (or reuse these) without restructuring.
 #
 # Populated, for this pass, from:
-#   iclr2027_conference_robust_extensions_red.tex   (theory)
+#   reference_robust_extensions.tex   (theory)
 #   results/deep_dissipative_nlink/copilotA1_theory_formal_verification_cross_audit.md (T1-T18)
 #
 # Do not paraphrase away quantifiers/strictness when editing this file.
@@ -17,14 +17,14 @@
 schema_version: 1
 
 theory_sources:
-  - id: iclr2027_robust_extensions
-    path: iclr2027_conference_robust_extensions_red.tex
+  - id: reference_robust_extensions
+    path: reference_robust_extensions.tex
     role: "Level-1 authoritative theory (theorems/propositions/assumptions/domains)."
 
 claims:
   - claim_id: T1
     label: "eq:ph_dynamics (J skew-symmetry)"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Methods / Port-Hamiltonian neural ODE"
     name: "Interconnection matrix skew-symmetry"
     claim_type: model_class_requirement
@@ -46,7 +46,7 @@ claims:
 
   - claim_id: T2
     label: "eq:ph_dynamics (R PSD)"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Methods / Port-Hamiltonian neural ODE"
     name: "Dissipation matrix positive semidefiniteness"
     claim_type: model_class_requirement
@@ -68,7 +68,7 @@ claims:
 
   - claim_id: T3
     label: "eq:energy_balance"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Methods / Port-Hamiltonian neural ODE"
     name: "Unforced dissipativity identity"
     claim_type: theorem
@@ -90,7 +90,7 @@ claims:
 
   - claim_id: T4
     label: "eq:coercive_lower_bound, App. app:hybrid"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Methods / Hybrid modern Hopfield Hamiltonian"
     name: "Coercivity of the hybrid Hamiltonian"
     claim_type: proposition
@@ -117,7 +117,7 @@ claims:
 
   - claim_id: T5
     label: "definitions preceding eq:component_safe_set"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Results / Regular energy levels expose the fundamental robustness margin"
     name: "Isolated local minimizer existence/location"
     claim_type: assumption
@@ -139,7 +139,7 @@ claims:
 
   - claim_id: T6
     label: "Proposition exact_cbf_set"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Results / Exact and robust set-valued input certificates"
     name: "Exact pointwise CBF admissible-input set"
     claim_type: proposition
@@ -161,7 +161,7 @@ claims:
 
   - claim_id: T7
     label: "implemented-dynamics diagnostic (no theory counterpart)"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "n/a — engineering diagnostic"
     name: "Implemented-dynamics CBF slack (clipped + PGD-attacked)"
     claim_type: out_of_scope_diagnostic
@@ -183,7 +183,7 @@ claims:
 
   - claim_id: T8
     label: "Theorem thm:uniform_boundary_set"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:robust_boundary"
     name: "Maximal uniform robust input set"
     claim_type: theorem
@@ -205,7 +205,7 @@ claims:
 
   - claim_id: T9
     label: "eq:exact_robust_radius, App. app:robust_boundary"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:robust_boundary"
     name: "Exact certified input radius"
     claim_type: derived_formula
@@ -227,7 +227,7 @@ claims:
 
   - claim_id: T10
     label: "Proposition regular_boundary"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:regular_boundary"
     name: "Regular energy boundary"
     claim_type: proposition
@@ -249,7 +249,7 @@ claims:
 
   - claim_id: T11
     label: "App. app:regular_boundary, r_{eps,star} definition"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:regular_boundary"
     name: "Boundary dissipation lower bound"
     claim_type: derived_quantity
@@ -275,7 +275,7 @@ claims:
 
   - claim_id: T12
     label: "Proposition hessian_pl"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Results / When is the local PL condition justified?"
     name: "Local Clarke-Hessian certificate for PL"
     claim_type: proposition
@@ -303,7 +303,7 @@ claims:
 
   - claim_id: T13
     label: "Theorem thm:input_energy"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:input_energy"
     name: "Input-to-energy tube under persistent forcing"
     claim_type: theorem
@@ -325,7 +325,7 @@ claims:
 
   - claim_id: T14
     label: "eq:robust_cbf_set, sigma_{W(z)} term"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Results / Exact and robust set-valued input certificates"
     name: "State-disturbance robustness term"
     claim_type: model_class_requirement
@@ -347,7 +347,7 @@ claims:
 
   - claim_id: T15
     label: "Proposition plant_transfer"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:atlas_transfer"
     name: "Plant-level certificate transfer"
     claim_type: proposition
@@ -370,7 +370,7 @@ claims:
 
   - claim_id: T16
     label: "remark after eq:port_output"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Methods / Port-Hamiltonian neural ODE"
     name: "Fitted-output / port-output decoupling"
     claim_type: architectural_remark
@@ -392,7 +392,7 @@ claims:
 
   - claim_id: T17
     label: "App. app:ph closing remark"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:ph"
     name: "No asymptotic-stability claim from dissipativity alone"
     claim_type: explicit_disclaimer
@@ -414,7 +414,7 @@ claims:
 
   - claim_id: T18
     label: "proof of Theorem thm:uniform_boundary_set (Nagumo argument)"
-    theory_source: iclr2027_robust_extensions
+    theory_source: reference_robust_extensions
     section: "Appendix app:robust_boundary, proof"
     name: "Continuous-time forward invariance (Nagumo)"
     claim_type: theorem_proof_technique

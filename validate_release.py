@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Author: Simone Betteti
 """Validate the public release; use --structural without runtime dependencies."""
 from __future__ import annotations
 import argparse

@@ -1,6 +1,6 @@
 experiment: deep_dissipative_nlink
 run_id: copilot_A1_full_stageA_recipe
-theory_source: iclr2027_conference_robust_extensions_red.tex
+theory_source: reference_robust_extensions.tex
 checkpoint_path: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/checkpoints/params.pkl
 config_path: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/config/config.json
 stress_arrays_npz: results/deep_dissipative_nlink/runs/copilot_A1_full_stageA_recipe/stress_tests/arrays/stress_arrays.npz
