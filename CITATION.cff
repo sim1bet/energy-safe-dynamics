@@ -9,15 +9,4 @@ authors:
     given-names: Morteza
   - family-names: Laurenti
     given-names: Luca
-preferred-citation:
-  type: conference-paper
-  title: "Safe-by-design Learning via Energy-Based Neural Networks"
-  authors:
-    - family-names: Betteti
-      given-names: Simone
-    - family-names: Lahijanian
-      given-names: Morteza
-    - family-names: Laurenti
-      given-names: Luca
-  collection-title: "International Conference on Learning Representations"
-  year: 2027
+year: 2027
