@@ -279,8 +279,7 @@ scripts/                Aggregate validation and reviewer-facing commands
 assets/                 GitHub presentation assets
 ```
 
-For detailed provenance, see [FILE_MAP.md](FILE_MAP.md),
-[MERGE_REPORT.md](MERGE_REPORT.md), and
+For detailed provenance, see [FILE_MAP.md](FILE_MAP.md), and
 [VALIDATION_REPORT.md](VALIDATION_REPORT.md).
 
 ## Reproducibility
@@ -320,10 +319,3 @@ paper. A machine-readable entry is provided in [CITATION.cff](CITATION.cff).
   author    = {Betteti, Simone and Lahijanian, Morteza and Laurenti, Luca},
 }
 ```
-
-## Acknowledging implementation ownership
-
-The proprietary model implementation under `EBM_model/`, the stress-test suite
-under `Stress_test_final/`, and the runtime HNER99 implementation under
-`runtime_hner99/` carry source-level attribution to **Simone Betteti** and the
-paper **“Safe-by-design learning via energy-based neural network.”**
